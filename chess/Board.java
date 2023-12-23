@@ -1,4 +1,4 @@
-public class Board 
+public class Board
 {
     private Piece[][] board;
     public Board()
@@ -53,19 +53,37 @@ public class Board
 
     public boolean move(int startRow, int startCol, int endRow, int endCol)
     {
+        if (board[startRow][startCol].getColor() == board[endRow][endCol].getColor())
+        {
+            return false;
+        }
+        String[] possibleMoves = board[startRow][startCol].legalSquares(startRow, startCol).split(",");
         
-        return true;
+        for (int i = 0; i < possibleMoves.length; i++)
+        {
+            int[]moveToCheck = parseMove(possibleMoves[i]);
+            if(moveToCheck.length == 2)
+            {
+                if (endRow == moveToCheck[0] && endCol == moveToCheck[1])
+                {
+                    board[endRow][endCol] = board[startRow][startCol];
+                    board[startRow][startCol] = new EmptyCell();
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
-    private int[] parseMove(String move)
+    private static int[] parseMove(String move)
     {
         int[] moveArr = new int[2];
         
         String[] moveCordsArr = move.split(".");
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < moveCordsArr.length; i++)
         {
             moveArr[i] = Integer.parseInt(moveCordsArr[i]);
-            
         }
         return moveArr;
     }

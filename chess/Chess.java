@@ -5,5 +5,6 @@ public class Chess
         var board = new Board();
 
         board.viewBoard();
+        
     }
 }

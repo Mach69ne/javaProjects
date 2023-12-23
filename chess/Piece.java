@@ -8,7 +8,7 @@ public class Piece
         this.white = white;
         this.symbol = symbol;
     }
-    public boolean isWhite()
+    public boolean getColor()
     {
         return this.white;
     }
