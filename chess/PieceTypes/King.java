@@ -25,14 +25,13 @@ public class King extends Piece
                     {
                         if (!(row == i && col == k))
                         {
-                            returnString += i + "." + k + ",";
+                            returnString += i + ":" + k + ",";
                         }
                     }
                     
                 }
             }
         }
-        System.out.println(returnString);
         return returnString;
     }
 

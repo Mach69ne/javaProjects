@@ -60,12 +60,9 @@ public class Board
         String[] possibleMoves = board[startRow][startCol].legalSquares(startRow, startCol).split(",");
         for (int i = 0; i < possibleMoves.length; i++)
         {
-            System.out.println(possibleMoves[i]);
             int[]moveToCheck = parseMove(possibleMoves[i]);
             if(moveToCheck.length == 2)
             {
-                System.out.println(moveToCheck[0]);
-                System.out.println(moveToCheck[1]);
                 if (endRow == moveToCheck[0] && endCol == moveToCheck[1])
                 {
                     board[endRow][endCol] = board[startRow][startCol];
@@ -81,12 +78,10 @@ public class Board
     private static int[] parseMove(String move)
     {
         int[] moveArr = new int[2];
-        System.out.println(move);
-        String[] moveCordsArr = move.split(".");
+        String[] moveCordsArr = move.split(":");
         for (int i = 0; i < moveCordsArr.length; i++)
         {
             moveArr[i] = Integer.parseInt(moveCordsArr[i]);
-
         }
         return moveArr;
     }

@@ -6,15 +6,22 @@ public class Chess
 
         board.viewBoard();
 
-        try{
-            board.move(0, 4, 1, 5);
-            board.viewBoard();
-        }
-        catch (IllegalArgumentException e)
+        while (true)
         {
-            System.out.println(e.getMessage());
+            try{
+                board.move(0, 4, 1, 5);
+                board.viewBoard();
+            }
+            catch (IllegalArgumentException e)
+            {
+                System.out.println(e.getMessage());
+            }
+
         }
+    }
 
-
+    private static String translateMove()
+    {
+        
     }
 }
