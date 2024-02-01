@@ -3,7 +3,7 @@ class MatrixUtils
     public static int[][] createMatrix()
     {
         int randomInt = getRandomNumber();
-        var matrix = new int[randomInt][randomInt];
+        var matrix = new int[10000][10000];
 
         for (int i = 0; i < matrix.length; i++)
         {
