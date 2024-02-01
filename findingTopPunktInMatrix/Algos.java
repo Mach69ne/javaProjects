@@ -5,9 +5,20 @@ class Algos
         long startTime = System.nanoTime();
 
         int middleIndex = (int) Math.floor(matrix.length / 2);
-        int workingIndexX = middleIndex;
-        int workingIndexY = middleIndex;
+        
+        findTop(matrix, middleIndex, middleIndex);
 
+        return System.nanoTime() - startTime;
+    }
+    public static long findMaxInMiddle(int[][] matrix)
+    {
+        long startTime = System.nanoTime();
+        return System.nanoTime() - startTime;
+    }
+    
+    private static void findTop(int[][] matrix, int workingIndexX, int workingIndexY)
+    {
+        
         while (true)
         {
             int value = matrix[workingIndexX][workingIndexY];
@@ -46,6 +57,7 @@ class Algos
             }
             break;
         }
-        return System.nanoTime() - startTime;
-    } 
+        return;
+    }
+
 }
