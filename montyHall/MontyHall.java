@@ -23,7 +23,7 @@ class MontyHall
 
             int doorToMoveTo = getRandomDoor();
 
-            while (doorToMoveTo == initialGuess || initialGuess == removedDoor)
+            while (doorToMoveTo == initialGuess || doorToMoveTo == removedDoor)
             {
                 doorToMoveTo = getRandomDoor();
             }
