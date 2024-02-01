@@ -2,27 +2,49 @@ class MontyHall
 {
     public static void main(String[] args)
     {
-        Door[] doors = new Door[3];
-        for (int i = 0; i < doors.length; i++)
+        int initGuess = 0;
+        int switchGuess = 0;
+        while (initGuess < 10000)
         {
-            doors[i] = new Door();
-        }
-
-        for (int i = 0; i < 100; i++)
-        {
-            Door[] doorArr = new Door[2];
-            int counter = 0;
-            int rng = (int) Math.round(Math.random()*2);
-            doors[rng].mark();
-            int initialGuess = (int) Math.round(Math.random()*2);
-
-            while (doorArr[0] == null || doorArr[1] == null)
+            boolean[] doors = new boolean[3];
+            for (int i = 0; i < doors.length; i++)
             {
-                doorArr[counter] = 
+                doors[i] = false;
             }
+            int correctDoor = getRandomDoor();
+            doors[correctDoor] = true;
+            int initialGuess = getRandomDoor();
             
+            int removedDoor = getRandomDoor();
+            while (removedDoor == correctDoor || removedDoor == initialGuess)
+            {
+                removedDoor = getRandomDoor();
+            }
 
+            int doorToMoveTo = getRandomDoor();
+
+            while (doorToMoveTo == initialGuess || initialGuess == removedDoor)
+            {
+                doorToMoveTo = getRandomDoor();
+            }
+
+            if (correctDoor == initialGuess)
+            {
+                initGuess++;
+            }
+            else if (correctDoor == doorToMoveTo) 
+            {
+                switchGuess++;
+            }
+        
         }
 
-    }    
+
+        System.out.println(initGuess + " " + switchGuess);
+    }
+
+    private static int getRandomDoor() 
+    {
+        return (int)Math.round(Math.random() * 2);
+    }
 }
