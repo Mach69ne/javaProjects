@@ -2,7 +2,7 @@ class Door
 {
     private boolean isDoor = false;
 
-    public Door(){}
+    //public Door(){}
 
     public boolean check()
     {

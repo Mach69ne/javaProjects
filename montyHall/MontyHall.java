@@ -5,7 +5,6 @@ class MontyHall
         for (int dean = 0; dean < 100; dean++)
         {
 
-        
             int initGuess = 0;
             int switchGuess = 0;
             while (initGuess < 10000)

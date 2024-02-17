@@ -53,7 +53,7 @@ public class Board
 
     public boolean move(int startRow, int startCol, int endRow, int endCol) throws IllegalArgumentException
     {
-        if (board[startRow][startCol].getColor() == board[endRow][endCol].getColor() && board[endRow][endCol].getSymbol() != '.')
+        if (board[startRow][startCol].isWhite() == board[endRow][endCol].isWhite() && board[endRow][endCol].getSymbol() != '.')
         {
             throw new IllegalArgumentException("You cannot capture pieces of your own color!");
         }
