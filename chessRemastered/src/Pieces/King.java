@@ -10,10 +10,7 @@ public class King extends Piece
     @Override
     public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
     {
-        if (PieceManager.isSameColor(this.isWhite(), position))
-        {
-            throw new IllegalArgumentException("Cannot capture your own piece");
-        }
+        super.checkIfMoveIsLegal(position);
         // Check if move is one square from current position
 
         if (Math.abs(super.getPosition().x() - position.x()) <= 1 && Math.abs(position.y() - super.getPosition().y()) <= 1)

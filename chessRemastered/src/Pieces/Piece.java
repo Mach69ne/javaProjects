@@ -14,7 +14,11 @@ public class Piece
 
     public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
     {
-        return false;
+        if (PieceManager.isSameColor(this.isWhite(), position))
+        {
+            throw new IllegalArgumentException("Cannot capture your own piece");
+        }
+        return true;
     }
 
     public Position getPosition()

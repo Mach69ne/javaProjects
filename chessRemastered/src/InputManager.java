@@ -1,4 +1,3 @@
-import Pieces.Piece;
 import Pieces.Position;
 
 public class InputManager

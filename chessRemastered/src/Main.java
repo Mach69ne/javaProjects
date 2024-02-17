@@ -7,8 +7,8 @@ public class Main
     {
 
         // TO-DO Add pieces on corresponding squares
-        King king = new King(true, 2, 2);
-        Pawn pawn = new Pawn(false, 3, 3);
+        new King(true, 2, 2);
+        new Pawn(false, 3, 3);
 
         InputManager inputManager = new InputManager();
 
@@ -18,21 +18,14 @@ public class Main
             try
             {
                 inputManager.handleInput();
-            }
-            catch (IllegalArgumentException e)
-            {
-                System.out.println(e.getMessage());
-                continue;
-            }
-            // Find piece on the working square, and try to move to square
-            Piece piece = PieceManager.pieceOnSquare(inputManager.getFromPosition());
-            if (piece == null)
-            {
-                System.out.println("That field is currently empty");
-                continue;
-            }
-            try
-            {
+
+                // Find piece on the working square, and try to move to square
+                Piece piece = PieceManager.pieceOnSquare(inputManager.getFromPosition());
+                if (piece == null)
+                {
+                    throw new IllegalArgumentException("That field is currently empty");
+                }
+
                 if (piece.checkIfMoveIsLegal(inputManager.getToPosition()))
                 {
                     piece.setPosition(inputManager.getToPosition());
