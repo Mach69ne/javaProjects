@@ -19,7 +19,7 @@ public class Main
             {
                 inputManager.handleInput();
 
-                // Find piece on the working square, and try to move to square
+                // Find piece on the working square, and try to move to target square
                 Piece piece = PieceManager.pieceOnSquare(inputManager.getFromPosition());
                 if (piece == null)
                 {
