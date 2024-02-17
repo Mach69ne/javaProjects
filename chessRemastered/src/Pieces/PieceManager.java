@@ -56,4 +56,19 @@ public class PieceManager
         }
         return board[position.x()][position.y()].isWhite() == movingPieceColor;
     }
+
+    public static boolean isTileUnderThreat(Position position)
+    {
+        for (Piece[] rows : board)
+        {
+            for (Piece piece : rows)
+            {
+                if (piece.checkIfMoveIsLegal(position))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

@@ -7,8 +7,8 @@ public class Main
     {
 
         // TO-DO Add pieces on corresponding squares
-        new King(true, 2, 2);
-        new Pawn(false, 3, 3);
+        new King(true, 0, 0);
+        new Pawn(false, 0, 7);
 
         InputManager inputManager = new InputManager();
 

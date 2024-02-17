@@ -12,6 +12,10 @@ public class King extends Piece
     {
         super.checkIfMoveIsLegal(position);
         // Check if move is one square from current position
+        if (PieceManager.isTileUnderThreat(position))
+        {
+            throw new IllegalArgumentException("That tile is unsafe");
+        }
 
         if (Math.abs(super.getPosition().x() - position.x()) <= 1 && Math.abs(position.y() - super.getPosition().y()) <= 1)
         {

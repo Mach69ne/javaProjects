@@ -33,6 +33,7 @@ public class InputManager
             {
                 x -= 49;
             }
+            y -= 1;
             if (x < 0 || x > 8 || y < 0 || y > 8)
             {
                 throw new IllegalArgumentException("Illegal characters involved in at least one of the moves");
