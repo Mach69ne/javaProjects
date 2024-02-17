@@ -2,15 +2,33 @@ package Pieces;
 
 public class King extends Piece
 {
-    public King(boolean white, int x, int y)
+    public King(boolean isWhite, int x, int y)
     {
-        super(white,x,y);
+        super(isWhite, x, y);
     }
 
     @Override
-    public boolean checkIfMoveIsLegal(Position position)
+    public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
     {
+        if (PieceManager.isSameColor(this.isWhite(), position))
+        {
+            throw new IllegalArgumentException("Cannot capture your own piece");
+        }
         // Check if move is one square from current position
-        return Math.abs(super.getPosition().getX() - position.getX()) <= 1 && Math.abs(position.getY() - super.getPosition().getY()) <= 1;
+
+        if (Math.abs(super.getPosition().x() - position.x()) <= 1 && Math.abs(position.y() - super.getPosition().y()) <= 1)
+        {
+            return true;
+        }
+        else
+        {
+            throw new IllegalArgumentException("The king cant move that far");
+        }
+    }
+
+    @Override
+    public char getSymbol()
+    {
+        return 'K';
     }
 }
