@@ -13,6 +13,13 @@ class Algos
     public static long findMaxInMiddle(int[][] matrix)
     {
         long startTime = System.nanoTime();
+        int middleIndex = (int) Math.floor(matrix.length / 2);
+        int maxIndex = 0;
+        for (int i = 0; i < matrix.length; i++)
+        {
+            if (matrix[middleIndex][maxIndex] < matrix[middleIndex][i]) maxIndex = i;
+        }
+        findTop(matrix, middleIndex, maxIndex);
         return System.nanoTime() - startTime;
     }
     
