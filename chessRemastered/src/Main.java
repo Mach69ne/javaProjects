@@ -6,9 +6,7 @@ public class Main
     public static void main(String[] args)
     {
 
-        PieceManager.clearBoard();
-        //InputManager inputManager = new InputManager();
-
+        PieceManager.resetBoard();
 
         while (true)
         {

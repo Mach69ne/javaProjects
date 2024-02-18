@@ -20,6 +20,7 @@ public class PieceManager
     public static void resetBoard()
     {
         clearBoard();
+        placePieces();
     }
 
     private static void placePieces()
@@ -34,10 +35,15 @@ public class PieceManager
                     board[x][y] = new Pawn(isWhite, x, y);
                     continue;
                 }
-                //                if (x == 7 || x == 0)
-                //                {
-                //                    board[x][y] = new Rook(isWhite, x, y);
-                //                }
+                if (y != 0 && y != 7)
+                {
+                    continue;
+                }
+
+                if (x == 0 || x == 7)
+                {
+                    board[x][y] = new Rook(isWhite, x, y);
+                }
                 //                if (x == 1 || x == 6)
                 //                {
                 //                    board[x][y] = new Knight(isWhite, x, y);
@@ -46,6 +52,14 @@ public class PieceManager
                 //                {
                 //                    board[x][y] = new Bishop(isWhite, x, y);
                 //                }
+                //                if (x == 3)
+                //                {
+                //                    board[x][y] = new Queen(isWhite, x, y);
+                //                }
+                if (x == 4)
+                {
+                    board[x][y] = new King(isWhite, x, y);
+                }
 
 
             }
@@ -109,15 +123,30 @@ public class PieceManager
         return board[position.x()][position.y()].isWhite() == movingPieceColor;
     }
 
-    public static boolean isTileUnderThreat(Position position)
+    public static boolean isTileUnderThreat(boolean isWhite, Position position)
     {
         for (Piece[] rows : board)
         {
             for (Piece piece : rows)
             {
-                if (piece.checkIfMoveIsLegal(position))
+                if (piece == null || piece.getSymbol() == 'K')
                 {
-                    return true;
+                    continue;
+                }
+                if (isSameColor(isWhite, position))
+                {
+                    continue;
+                }
+                try
+                {
+                    if (piece.checkIfMoveIsLegal(position))
+                    {
+                        return true;
+                    }
+                }
+                catch (IllegalArgumentException e)
+                {
+                    System.out.print(e.getMessage());
                 }
             }
         }
