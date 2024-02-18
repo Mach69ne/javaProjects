@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class PieceManager
 {
     private static final Piece[][] board = new Piece[8][8];
-    private Position whiteKing;
-    private Position blackKing;
+    private static Position whiteKingPosition;
+    private static Position blackKingPosition;
 
     public static void clearBoard()
     {
@@ -21,6 +21,7 @@ public class PieceManager
     {
         clearBoard();
         placePieces();
+        printBoard();
     }
 
     private static void placePieces()
@@ -63,7 +64,7 @@ public class PieceManager
 
 
             }
-            if (y > 2)
+            if (y > 4)
             {
                 isWhite = false;
             }
@@ -106,6 +107,17 @@ public class PieceManager
 
     public static void addPiece(Piece piece, Position position)
     {
+        if (piece.getSymbol() == 'K')
+        {
+            if (piece.isWhite())
+            {
+                setWhiteKingPosition(position);
+            }
+            else
+            {
+                setBlackKingPosition(position);
+            }
+        }
         addPiece(piece, position.x(), position.y());
     }
 
@@ -125,20 +137,30 @@ public class PieceManager
 
     public static boolean isTileUnderThreat(boolean isWhite, Position position)
     {
-        for (Piece[] rows : board)
+        for (int i = 0; i < board.length; i++)
         {
-            for (Piece piece : rows)
+            for (int k = 0; k < board[i].length; k++)
             {
-                if (piece == null || piece.getSymbol() == 'K')
+                Piece piece = board[i][k];
+                if (piece == null)
                 {
                     continue;
                 }
-                if (isSameColor(isWhite, position))
+                if (piece.isWhite() == isWhite)
                 {
+                    continue;
+                }
+                if (piece.getSymbol() == 'K')
+                {
+                    if (Math.abs(piece.getPosition().x() - position.x()) <= 1 && Math.abs(piece.getPosition().y() - position.y()) <= 1)
+                    {
+                        return true;
+                    }
                     continue;
                 }
                 try
                 {
+
                     if (piece.checkIfMoveIsLegal(position))
                     {
                         return true;
@@ -146,10 +168,32 @@ public class PieceManager
                 }
                 catch (IllegalArgumentException e)
                 {
-                    System.out.print(e.getMessage());
+                    //
                 }
             }
         }
         return false;
+    }
+
+    private static void setWhiteKingPosition(Position position)
+    {
+        whiteKingPosition = position;
+    }
+
+    private static void setBlackKingPosition(Position position)
+    {
+        blackKingPosition = position;
+    }
+
+    public static boolean isInCheck(boolean isWhite)
+    {
+        if (isWhite)
+        {
+            return isTileUnderThreat(true, whiteKingPosition);
+        }
+        else
+        {
+            return isTileUnderThreat(false, blackKingPosition);
+        }
     }
 }

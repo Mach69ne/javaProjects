@@ -14,7 +14,7 @@ public class King extends Piece
 
         // Check if the king would be threatened by moving
 
-        if (PieceManager.isTileUnderThreat(super.isWhite(), position))
+        if (PieceManager.isTileUnderThreat(isWhite(), position))
         {
             throw new IllegalArgumentException("That tile is unsafe");
         }

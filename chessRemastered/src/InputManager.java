@@ -17,7 +17,7 @@ public class InputManager
         String input = scanner.nextLine();
         if (input.equals("restart"))
         {
-            throw new Exception();
+            throw new Exception(input);
         }
         String[] positions = input.split(" ");
         if (positions.length != 2)

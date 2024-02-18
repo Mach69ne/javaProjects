@@ -18,6 +18,7 @@ public class Piece
         {
             throw new IllegalArgumentException("Cannot capture your own piece");
         }
+
         return true;
     }
 

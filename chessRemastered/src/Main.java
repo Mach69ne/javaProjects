@@ -5,13 +5,13 @@ public class Main
 
     public static void main(String[] args)
     {
-
+        boolean whiteTurn = true;
         PieceManager.resetBoard();
-
         while (true)
         {
             try
             {
+
                 InputManager.handleInput();
 
                 // Find piece on the working square, and try to move to target square
@@ -30,16 +30,28 @@ public class Main
                 {
                     System.out.println("That is not a legal move");
                 }
+
             }
             catch (IllegalArgumentException e)
             {
                 System.out.println(e.getMessage());
+                PieceManager.printBoard();
+                continue;
             }
             catch (Exception e)
             {
                 PieceManager.resetBoard();
+
             }
+            boolean inCheck = PieceManager.isInCheck(whiteTurn);
+            if (inCheck)
+            {
+                //PieceManager.undoMove();
+                continue;
+            }
+            whiteTurn = !whiteTurn;
             PieceManager.printBoard();
+
         }
 
 

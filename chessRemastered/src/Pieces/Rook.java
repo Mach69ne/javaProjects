@@ -17,42 +17,37 @@ public class Rook extends Piece
     public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
     {
         super.checkIfMoveIsLegal(position);
-        Position incrementingPosition = new Position(this.getPosition().x(), this.getPosition().y());
-        int workingXValue = this.getPosition().x();
-        if (this.getPosition().x() != position.x())
-        {
-            int increment = -1;
-            if (this.getPosition().x() > position.x())
-            {
-                increment = 1;
-            }
-            while (incrementingPosition.x() != position.x())
-            {
-                incrementingPosition = new Position(increment + incrementingPosition.x(), position.y());
-                if (!PieceManager.isEmpty(incrementingPosition))
-                {
-                    return false;
-                }
-            }
-        }
-        else if (this.getPosition().y() != position.y())
-        {
-            int increment = -1;
-            if (this.getPosition().y() > position.y())
-            {
-                increment = 1;
-            }
-            while (incrementingPosition.y() != position.y())
-            {
-                incrementingPosition = new Position(position.x(), incrementingPosition.y() + increment);
-                if (!PieceManager.isEmpty(incrementingPosition))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-        //return this.getPosition().x() != position.x() || this.getPosition().y() != position.y();
 
+        if (this.getPosition().x() == position.x() && this.getPosition().y() == position.y())
+        {
+            return true;
+        }
+
+        if (this.getPosition().x() != position.x() && this.getPosition().y() != position.y())
+        {
+            return false;
+        }
+
+        int xIncrement = -1;
+        int yIncrement = -1;
+        if (this.getPosition().x() > position.x())
+        {
+            xIncrement = 1;
+        }
+        if (this.getPosition().y() > position.y())
+        {
+            yIncrement = 1;
+        }
+        if (this.getPosition().x() == position.x())
+        {
+            xIncrement = 0;
+        }
+        if (this.getPosition().y() == position.y())
+        {
+            yIncrement = 0;
+        }
+
+        return checkIfMoveIsLegal(new Position((this.getPosition().x() + xIncrement),
+                this.getPosition().y() + yIncrement));
     }
 }
