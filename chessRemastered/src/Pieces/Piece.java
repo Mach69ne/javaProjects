@@ -16,7 +16,7 @@ public class Piece
     {
         if (PieceManager.isSameColor(this.isWhite(), position))
         {
-            throw new IllegalArgumentException("Cannot capture your own piece");
+            throw new IllegalArgumentException("Your own piece is in the way");
         }
 
         return true;

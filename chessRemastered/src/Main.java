@@ -35,20 +35,19 @@ public class Main
             catch (IllegalArgumentException e)
             {
                 System.out.println(e.getMessage());
-                PieceManager.printBoard();
                 continue;
             }
             catch (Exception e)
             {
                 PieceManager.resetBoard();
-
-            }
-            boolean inCheck = PieceManager.isInCheck(whiteTurn);
-            if (inCheck)
-            {
-                //PieceManager.undoMove();
                 continue;
             }
+            //boolean inCheck = PieceManager.isInCheck(whiteTurn);
+            //if (inCheck)
+            //{
+            //PieceManager.undoMove();
+            //    continue;
+            //}
             whiteTurn = !whiteTurn;
             PieceManager.printBoard();
 

@@ -16,38 +16,47 @@ public class Rook extends Piece
     @Override
     public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
     {
-        super.checkIfMoveIsLegal(position);
-
         if (this.getPosition().x() == position.x() && this.getPosition().y() == position.y())
         {
             return true;
         }
-
+        super.checkIfMoveIsLegal(position);
         if (this.getPosition().x() != position.x() && this.getPosition().y() != position.y())
         {
             return false;
         }
+        else if (Math.abs(this.getPosition().x() - position.x()) == 1 || Math.abs(this.getPosition().y() - position.y()) == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return checkIfPathIsClear(position);
+        }
+    }
 
-        int xIncrement = -1;
-        int yIncrement = -1;
+    private boolean checkIfPathIsClear(Position position)
+    {
         if (this.getPosition().x() > position.x())
         {
-            xIncrement = 1;
+            position = new Position(position.x() + 1, position.y());
         }
-        if (this.getPosition().y() > position.y())
+        else if (this.getPosition().x() < position.x())
         {
-            yIncrement = 1;
+            position = new Position(position.x() - 1, position.y());
         }
-        if (this.getPosition().x() == position.x())
+        else if (this.getPosition().y() > position.y())
         {
-            xIncrement = 0;
+            position = new Position(position.x(), position.y() + 1);
         }
-        if (this.getPosition().y() == position.y())
+        else
         {
-            yIncrement = 0;
+            position = new Position(position.x(), position.y() - 1);
         }
-
-        return checkIfMoveIsLegal(new Position((this.getPosition().x() + xIncrement),
-                this.getPosition().y() + yIncrement));
+        if (!PieceManager.isEmpty(position))
+        {
+            return false;
+        }
+        return checkIfMoveIsLegal(position);
     }
 }
