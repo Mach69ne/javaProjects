@@ -2,9 +2,9 @@ import Pieces.Position;
 
 public class InputManager
 {
-    private final java.util.Scanner scanner = new java.util.Scanner(System.in);
-    private Position fromPosition;
-    private Position toPosition;
+    private static final java.util.Scanner scanner = new java.util.Scanner(System.in);
+    private static Position fromPosition;
+    private static Position toPosition;
 
     InputManager()
     {
@@ -12,9 +12,13 @@ public class InputManager
 
     // To move you type the position of the piece, followed by the position to move to:
     // FX: e2 e4
-    public void handleInput() throws IllegalArgumentException
+    public static void handleInput() throws Exception
     {
         String input = scanner.nextLine();
+        if (input.equals("restart"))
+        {
+            throw new Exception();
+        }
         String[] positions = input.split(" ");
         if (positions.length != 2)
         {
@@ -41,11 +45,11 @@ public class InputManager
 
             if (i == 0)
             {
-                this.fromPosition = new Position(x, y);
+                fromPosition = new Position(x, y);
             }
             if (i == 1)
             {
-                this.toPosition = new Position(x, y);
+                toPosition = new Position(x, y);
             }
 
 
@@ -53,14 +57,14 @@ public class InputManager
 
     }
 
-    public Position getFromPosition()
+    public static Position getFromPosition()
     {
-        return this.fromPosition;
+        return fromPosition;
     }
 
-    public Position getToPosition()
+    public static Position getToPosition()
     {
-        return this.toPosition;
+        return toPosition;
     }
 
 }

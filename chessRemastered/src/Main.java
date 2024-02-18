@@ -6,29 +6,26 @@ public class Main
     public static void main(String[] args)
     {
 
-        // TO-DO Add pieces on corresponding squares
-        new King(true, 0, 0);
-        new Pawn(false, 0, 7);
-
-        InputManager inputManager = new InputManager();
+        PieceManager.clearBoard();
+        //InputManager inputManager = new InputManager();
 
 
         while (true)
         {
             try
             {
-                inputManager.handleInput();
+                InputManager.handleInput();
 
                 // Find piece on the working square, and try to move to target square
-                Piece piece = PieceManager.pieceOnSquare(inputManager.getFromPosition());
+                Piece piece = PieceManager.pieceOnSquare(InputManager.getFromPosition());
                 if (piece == null)
                 {
                     throw new IllegalArgumentException("That field is currently empty");
                 }
 
-                if (piece.checkIfMoveIsLegal(inputManager.getToPosition()))
+                if (piece.checkIfMoveIsLegal(InputManager.getToPosition()))
                 {
-                    piece.setPosition(inputManager.getToPosition());
+                    piece.setPosition(InputManager.getToPosition());
                     System.out.println("Moved piece");
                 }
                 else
@@ -39,6 +36,10 @@ public class Main
             catch (IllegalArgumentException e)
             {
                 System.out.println(e.getMessage());
+            }
+            catch (Exception e)
+            {
+                PieceManager.resetBoard();
             }
             PieceManager.printBoard();
         }

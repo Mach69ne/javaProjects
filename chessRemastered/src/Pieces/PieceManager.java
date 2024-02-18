@@ -1,8 +1,60 @@
 package Pieces;
 
+import java.util.Arrays;
+
 public class PieceManager
 {
     private static final Piece[][] board = new Piece[8][8];
+    private Position whiteKing;
+    private Position blackKing;
+
+    public static void clearBoard()
+    {
+        for (int i = 0; i < board.length; i++)
+        {
+            Arrays.fill(board[i], null);
+        }
+
+    }
+
+    public static void resetBoard()
+    {
+        clearBoard();
+    }
+
+    private static void placePieces()
+    {
+        boolean isWhite = true;
+        for (int y = 0; y < board.length; y++)
+        {
+            for (int x = 0; x < board[y].length; x++)
+            {
+                if (y == 1 || y == 6)
+                {
+                    board[x][y] = new Pawn(isWhite, x, y);
+                    continue;
+                }
+                //                if (x == 7 || x == 0)
+                //                {
+                //                    board[x][y] = new Rook(isWhite, x, y);
+                //                }
+                //                if (x == 1 || x == 6)
+                //                {
+                //                    board[x][y] = new Knight(isWhite, x, y);
+                //                }
+                //                if (x == 2 || x == 5)
+                //                {
+                //                    board[x][y] = new Bishop(isWhite, x, y);
+                //                }
+
+
+            }
+            if (y > 2)
+            {
+                isWhite = false;
+            }
+        }
+    }
 
     public static Piece pieceOnSquare(Position position)
     {
