@@ -6,9 +6,6 @@ public class InputManager
     private static Position fromPosition;
     private static Position toPosition;
 
-    InputManager()
-    {
-    }
 
     // To move you type the position of the piece, followed by the position to move to:
     // FX: e2 e4
