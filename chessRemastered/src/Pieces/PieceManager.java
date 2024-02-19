@@ -45,10 +45,10 @@ public class PieceManager
                 {
                     board[x][y] = new Rook(isWhite, x, y);
                 }
-                //                if (x == 1 || x == 6)
-                //                {
-                //                    board[x][y] = new Knight(isWhite, x, y);
-                //                }
+                                if (x == 1 || x == 6)
+                                {
+                                    board[x][y] = new Knight(isWhite, x, y);
+                                }
                 //                if (x == 2 || x == 5)
                 //                {
                 //                    board[x][y] = new Bishop(isWhite, x, y);
@@ -196,4 +196,6 @@ public class PieceManager
             return isTileUnderThreat(false, blackKingPosition);
         }
     }
+
+
 }
