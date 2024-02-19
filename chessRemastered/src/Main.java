@@ -42,12 +42,12 @@ public class Main
                 PieceManager.resetBoard();
                 continue;
             }
-            boolean inCheck = PieceManager.isInCheck(whiteTurn);
-            if (inCheck)
-            {
+            //boolean inCheck = PieceManager.isInCheck(whiteTurn);
+            //if (inCheck)
+            //{
             //PieceManager.undoMove();
-                continue;
-            }
+                //continue;
+            //}
             whiteTurn = !whiteTurn;
             PieceManager.printBoard();
 
