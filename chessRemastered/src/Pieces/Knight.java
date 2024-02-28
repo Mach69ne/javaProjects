@@ -15,10 +15,15 @@ public class Knight extends Piece
         int deltaX = Math.abs(this.getPosition().x() - position.x());
         int deltaY = Math.abs(this.getPosition().y() - position.y());
 
-        if (deltaX == 1 && deltaY != 2) return false;
-        if (deltaX == 2 && deltaY != 1) return false;
+        System.out.println(deltaX + " " + deltaY);
+        if (deltaX == 1 && deltaY == 2) return true;
+        return deltaX == 2 && deltaY == 1;
 
-        return true;
+    }
 
+    @Override
+    public char getSymbol()
+    {
+        return 'N';
     }
 }

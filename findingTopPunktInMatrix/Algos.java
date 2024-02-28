@@ -6,7 +6,7 @@ class Algos
 
         int middleIndex = (int) Math.floor(matrix.length / 2);
         
-        findTop(matrix, middleIndex, middleIndex);
+        System.out.println(findTop(matrix, middleIndex, middleIndex));
 
         return System.nanoTime() - startTime;
     }
@@ -19,15 +19,16 @@ class Algos
         {
             if (matrix[middleIndex][maxIndex] < matrix[middleIndex][i]) maxIndex = i;
         }
-        findTop(matrix, middleIndex, maxIndex);
+        System.out.println(findTop(matrix, middleIndex, maxIndex));
         return System.nanoTime() - startTime;
     }
     
-    private static void findTop(int[][] matrix, int workingIndexX, int workingIndexY)
+    private static long findTop(int[][] matrix, int workingIndexX, int workingIndexY)
     {
-        
+        long amountOfTurns = 0;
         while (true)
         {
+            amountOfTurns++;
             int value = matrix[workingIndexX][workingIndexY];
             
             if (workingIndexX - 1 >= 0)
@@ -64,7 +65,7 @@ class Algos
             }
             break;
         }
-        return;
+        return amountOfTurns;
     }
 
 }

@@ -2,7 +2,6 @@ package Pieces;
 
 public class Pawn extends Piece
 {
-
     public Pawn(boolean isWhite, int x, int y)
     {
         super(isWhite, x, y);
@@ -11,6 +10,12 @@ public class Pawn extends Piece
     @Override
     public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
     {
+        if (this.isWhite() && this.getPosition().x() == 2)
+        {
+            if (position.y() == 4)
+            {
+            }
+        }
         super.checkIfMoveIsLegal(position);
         if (this.getPosition().x() == position.x() && !PieceManager.isEmpty(position))
         {

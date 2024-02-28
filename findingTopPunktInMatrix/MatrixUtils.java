@@ -18,6 +18,6 @@ class MatrixUtils
 
     private static int getRandomNumber()
     {
-        return (int) Math.round(Math.random() * 100 + 1);
+        return (int) Math.round(Math.random() * 9 + 1);
     }
 }

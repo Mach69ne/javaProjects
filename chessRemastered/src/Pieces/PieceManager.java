@@ -33,7 +33,7 @@ public class PieceManager
             {
                 if (y == 1 || y == 6)
                 {
-                    board[x][y] = new Pawn(isWhite, x, y);
+                    new Pawn(isWhite, x, y);
                     continue;
                 }
                 if (y != 0 && y != 7)
@@ -43,23 +43,23 @@ public class PieceManager
 
                 if (x == 0 || x == 7)
                 {
-                    board[x][y] = new Rook(isWhite, x, y);
+                    new Rook(isWhite, x, y);
                 }
                                 if (x == 1 || x == 6)
                                 {
-                                    board[x][y] = new Knight(isWhite, x, y);
+                                    new Knight(isWhite, x, y);
                                 }
-                //                if (x == 2 || x == 5)
-                //                {
-                //                    board[x][y] = new Bishop(isWhite, x, y);
-                //                }
+                               if (x == 2 || x == 5)
+                                {
+                                    new Bishop(isWhite, x, y);
+                                }
                 //                if (x == 3)
                 //                {
-                //                    board[x][y] = new Queen(isWhite, x, y);
+                //                    new Queen(isWhite, x, y);
                 //                }
                 if (x == 4)
                 {
-                    board[x][y] = new King(isWhite, x, y);
+                    new King(isWhite, x, y);
                 }
 
 

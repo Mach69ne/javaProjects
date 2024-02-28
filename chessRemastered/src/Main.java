@@ -39,7 +39,7 @@ public class Main
             }
             catch (Exception e)
             {
-                PieceManager.resetBoard();
+                //PieceManager.resetBoard();
                 continue;
             }
             //boolean inCheck = PieceManager.isInCheck(whiteTurn);
