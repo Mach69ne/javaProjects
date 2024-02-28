@@ -8,15 +8,9 @@ public class Rook extends Piece
     }
 
     @Override
-    public char getSymbol()
-    {
-        return 'R';
-    }
-
-    @Override
     public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
     {
-        if (this.getPosition().x() == position.x() && this.getPosition().y() == position.y())
+        if (this.getPosition().equals(position))
         {
             return true;
         }
@@ -35,23 +29,29 @@ public class Rook extends Piece
         }
     }
 
+    @Override
+    public char getSymbol()
+    {
+        return 'R';
+    }
+
     private boolean checkIfPathIsClear(Position position)
     {
         if (this.getPosition().x() > position.x())
         {
-            position = new Position(position.x() + 1, position.y());
+            position = position.changeX(1);
         }
         else if (this.getPosition().x() < position.x())
         {
-            position = new Position(position.x() - 1, position.y());
+            position = position.changeX(-1);
         }
         else if (this.getPosition().y() > position.y())
         {
-            position = new Position(position.x(), position.y() + 1);
+            position = position.changeY(1);
         }
         else
         {
-            position = new Position(position.x(), position.y() - 1);
+            position = position.changeY(-1);
         }
         if (!PieceManager.isEmpty(position))
         {
