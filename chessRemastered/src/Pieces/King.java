@@ -13,6 +13,7 @@ public class King extends Piece
         super.checkIfMoveIsLegal(position);
 
         // Check if the king would be threatened by moving
+        // If not, throw IllegalArgumentException caught in Main
 
         if (PieceManager.isTileUnderThreat(isWhite(), position))
         {
