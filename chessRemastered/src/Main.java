@@ -44,17 +44,17 @@ public class Main
             catch (Exception e)
             {
                 PieceManager.resetBoard();
+                whiteTurn = true;
                 continue;
             }
             //boolean inCheck = PieceManager.isInCheck(whiteTurn);
-            //if (inCheck)
-            //{
-            //PieceManager.undoMove();
-            //continue;
-            //}
+            //            if (inCheck)
+            //            {
+            //                PieceManager.undoMove();
+            //                continue;
+            //            }
             whiteTurn = !whiteTurn;
             PieceManager.printBoard();
-
         }
 
 
