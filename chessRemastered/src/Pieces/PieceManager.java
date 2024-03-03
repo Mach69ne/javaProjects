@@ -1,10 +1,12 @@
 package Pieces;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class PieceManager
 {
-    private static final Piece[][] board = new Piece[8][8];
+    private static final Stack<Piece[][]> boardStack = new Stack<Piece[][]>();
+    private static Piece[][] board = new Piece[8][8];
     private static Position whiteKingPosition;
     private static Position blackKingPosition;
 
@@ -88,6 +90,19 @@ public class PieceManager
             System.out.println(printString);
             printString = new StringBuilder();
         }
+    }
+
+    public static void undoMove()
+    {
+        if (!boardStack.isEmpty())
+        {
+            board = boardStack.pop();
+        }
+    }
+
+    public static void saveBoardStateToStack()
+    {
+        boardStack.push(board);
     }
 
     public static Piece pieceOnSquare(Position position)
