@@ -75,16 +75,16 @@ public class PieceManager
     public static void printBoard()
     {
         StringBuilder printString = new StringBuilder();
-        for (int i = 0; i < board.length; i++)
+        for (int i = 7; i >= 0; i--)
         {
             for (int k = 0; k < board[i].length; k++)
             {
-                if (board[i][k] == null)
+                if (board[k][i] == null)
                 {
                     printString.append(".");
                     continue;
                 }
-                printString.append(board[i][k].getSymbol());
+                printString.append(board[k][i].getSymbol());
             }
             System.out.println(printString);
             printString = new StringBuilder();
