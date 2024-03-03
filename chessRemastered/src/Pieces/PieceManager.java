@@ -8,6 +8,13 @@ public class PieceManager
     private static Position whiteKingPosition;
     private static Position blackKingPosition;
 
+    public static void resetBoard()
+    {
+        clearBoard();
+        placePieces();
+        printBoard();
+    }
+
     public static void clearBoard()
     {
         for (int i = 0; i < board.length; i++)
@@ -15,13 +22,6 @@ public class PieceManager
             Arrays.fill(board[i], null);
         }
 
-    }
-
-    public static void resetBoard()
-    {
-        clearBoard();
-        placePieces();
-        printBoard();
     }
 
     private static void placePieces()
@@ -45,18 +45,18 @@ public class PieceManager
                 {
                     new Rook(isWhite, x, y);
                 }
-                                if (x == 1 || x == 6)
-                                {
-                                    new Knight(isWhite, x, y);
-                                }
-                               if (x == 2 || x == 5)
-                                {
-                                    new Bishop(isWhite, x, y);
-                                }
-                //                if (x == 3)
-                //                {
-                //                    new Queen(isWhite, x, y);
-                //                }
+                if (x == 1 || x == 6)
+                {
+                    new Knight(isWhite, x, y);
+                }
+                if (x == 2 || x == 5)
+                {
+                    new Bishop(isWhite, x, y);
+                }
+                if (x == 3)
+                {
+                    new Queen(isWhite, x, y);
+                }
                 if (x == 4)
                 {
                     new King(isWhite, x, y);
@@ -69,21 +69,6 @@ public class PieceManager
                 isWhite = false;
             }
         }
-    }
-
-    public static Piece pieceOnSquare(Position position)
-    {
-        return board[position.x()][position.y()];
-    }
-
-    public static void removePiece(Position position)
-    {
-        board[position.x()][position.y()] = null;
-    }
-
-    public static void addPiece(Piece piece, int x, int y)
-    {
-        board[x][y] = piece;
     }
 
     public static void printBoard()
@@ -105,6 +90,16 @@ public class PieceManager
         }
     }
 
+    public static Piece pieceOnSquare(Position position)
+    {
+        return board[position.x()][position.y()];
+    }
+
+    public static void removePiece(Position position)
+    {
+        board[position.x()][position.y()] = null;
+    }
+
     public static void addPiece(Piece piece, Position position)
     {
         if (piece.getSymbol() == 'K')
@@ -121,6 +116,21 @@ public class PieceManager
         addPiece(piece, position.x(), position.y());
     }
 
+    private static void setWhiteKingPosition(Position position)
+    {
+        whiteKingPosition = position;
+    }
+
+    private static void setBlackKingPosition(Position position)
+    {
+        blackKingPosition = position;
+    }
+
+    public static void addPiece(Piece piece, int x, int y)
+    {
+        board[x][y] = piece;
+    }
+
     public static boolean isEmpty(Position position)
     {
         return board[position.x()][position.y()] == null;
@@ -133,6 +143,18 @@ public class PieceManager
             return false;
         }
         return board[position.x()][position.y()].isWhite() == movingPieceColor;
+    }
+
+    public static boolean isInCheck(boolean isWhite)
+    {
+        if (isWhite)
+        {
+            return isTileUnderThreat(true, whiteKingPosition);
+        }
+        else
+        {
+            return isTileUnderThreat(false, blackKingPosition);
+        }
     }
 
     public static boolean isTileUnderThreat(boolean isWhite, Position position)
@@ -173,28 +195,6 @@ public class PieceManager
             }
         }
         return false;
-    }
-
-    private static void setWhiteKingPosition(Position position)
-    {
-        whiteKingPosition = position;
-    }
-
-    private static void setBlackKingPosition(Position position)
-    {
-        blackKingPosition = position;
-    }
-
-    public static boolean isInCheck(boolean isWhite)
-    {
-        if (isWhite)
-        {
-            return isTileUnderThreat(true, whiteKingPosition);
-        }
-        else
-        {
-            return isTileUnderThreat(false, blackKingPosition);
-        }
     }
 
 
