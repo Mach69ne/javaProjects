@@ -26,6 +26,10 @@ public class Bishop extends Piece
         {
             return false;
         }
+        if (Math.abs(deltaX) == 1 && Math.abs(deltaY) == 1)
+        {
+            return true;
+        }
 
         return checkIfPathIsClear(position);
     }
@@ -53,6 +57,10 @@ public class Bishop extends Piece
         else
         {
             position = position.changeY(-1);
+        }
+        if (!PieceManager.isEmpty(position))
+        {
+            return false;
         }
         return checkIfMoveIsLegal(position);
     }
