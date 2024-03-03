@@ -1,4 +1,5 @@
-import Pieces.*;
+import Pieces.Piece;
+import Pieces.PieceManager;
 
 public class Main
 {
@@ -39,14 +40,14 @@ public class Main
             }
             catch (Exception e)
             {
-                //PieceManager.resetBoard();
+                PieceManager.resetBoard();
                 continue;
             }
             //boolean inCheck = PieceManager.isInCheck(whiteTurn);
             //if (inCheck)
             //{
             //PieceManager.undoMove();
-                //continue;
+            //continue;
             //}
             whiteTurn = !whiteTurn;
             PieceManager.printBoard();
