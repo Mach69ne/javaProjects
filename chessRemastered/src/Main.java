@@ -21,7 +21,10 @@ public class Main
                 {
                     throw new IllegalArgumentException("That field is currently empty");
                 }
-
+                if (piece.isWhite() != whiteTurn)
+                {
+                    throw new IllegalArgumentException("You cannot move opponents piece");
+                }
                 if (piece.checkIfMoveIsLegal(InputManager.getToPosition()))
                 {
                     piece.setPosition(InputManager.getToPosition());
