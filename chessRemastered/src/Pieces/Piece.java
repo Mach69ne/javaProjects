@@ -2,8 +2,8 @@ package Pieces;
 
 public class Piece
 {
-    private Position position;
     private final boolean isWhite;
+    private Position position;
 
     public Piece(boolean isWhite, int x, int y)
     {
@@ -22,6 +22,11 @@ public class Piece
         return true;
     }
 
+    public boolean isWhite()
+    {
+        return isWhite;
+    }
+
     public Position getPosition()
     {
         return this.position;
@@ -37,11 +42,6 @@ public class Piece
     public char getSymbol()
     {
         return '.';
-    }
-
-    public boolean isWhite()
-    {
-        return isWhite;
     }
 
 }
