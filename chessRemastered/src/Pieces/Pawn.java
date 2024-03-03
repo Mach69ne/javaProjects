@@ -2,6 +2,8 @@ package Pieces;
 
 public class Pawn extends Piece
 {
+    private boolean hasMoved = false;
+
     public Pawn(boolean isWhite, int x, int y)
     {
         super(isWhite, x, y);
@@ -10,13 +12,25 @@ public class Pawn extends Piece
     @Override
     public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
     {
-        if (this.isWhite() && this.getPosition().x() == 2)
+        super.checkIfMoveIsLegal(position);
+
+        if (!this.hasMoved)
         {
-            if (position.y() == 4)
+            System.out.println(position.x() + " " + position.y());
+            System.out.println(this.getPosition().x() + " " + this.getPosition().y());
+            if (this.getPosition().x() == position.x())
             {
+                if (isWhite() && position.y() == 3)
+                {
+                    return PieceManager.isEmpty(position);
+                }
+                else if (!isWhite() && position.y() == 4)
+                {
+                    return PieceManager.isEmpty(position);
+                }
             }
         }
-        super.checkIfMoveIsLegal(position);
+
         if (this.getPosition().x() == position.x() && !PieceManager.isEmpty(position))
         {
             throw new IllegalArgumentException("Cant capture pieces non-diagonally");
@@ -31,14 +45,14 @@ public class Pawn extends Piece
         {
             if (this.getPosition().y() - position.y() != -1)
             {
-                throw new IllegalArgumentException("Your pawn cant move in that direction");
+                throw new IllegalArgumentException("You cant move to that tile");
             }
         }
         else
         {
             if (this.getPosition().y() - position.y() != 1)
             {
-                throw new IllegalArgumentException("Your pawn cant move in that direction");
+                throw new IllegalArgumentException("You cant move to that tile");
             }
         }
 
@@ -50,6 +64,13 @@ public class Pawn extends Piece
         {
             throw new IllegalArgumentException("Cannot capture piece more than 1 tile away");
         }
+    }
+
+    @Override
+    public void setPosition(Position position)
+    {
+        this.hasMoved = true;
+        super.setPosition(position);
     }
 
     @Override
