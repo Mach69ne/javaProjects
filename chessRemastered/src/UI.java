@@ -23,7 +23,7 @@ public class UI
         this.frame = new JFrame();
         frame.setBounds(10, 10, 512, 512);
         frame.setUndecorated(true); // Whether to have buttons and bar on UI
-        this.img = ImageIO.read(new File("e:\\downloads2/chess.png"));
+        this.img = ImageIO.read(new File("src/Images/chess.png"));
 
         int ind = 0;
         for (int y = 0; y < 400; y += 200)
@@ -72,13 +72,14 @@ public class UI
                     {
 
                         int ind = 0;
-                        Piece piece = PieceManager.pieceOnSquare(new Position(i, k));
+                        Piece piece = PieceManager.pieceOnSquare(new Position(i, 7 - k));
 
 
                         if (piece == null)
                         {
                             continue;
                         }
+                        System.out.println(piece.isWhite());
 
                         switch (piece.getSymbol())
                         {
@@ -112,10 +113,12 @@ public class UI
                                 break;
                             }
                         }
-                        if (piece.isWhite())
+                        if (!piece.isWhite())
                         {
                             ind += 6;
                         }
+
+
                         g.drawImage(imgs[ind], i * 64, k * 64, this);
 
                     }
