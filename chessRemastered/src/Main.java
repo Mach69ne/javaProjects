@@ -8,22 +8,26 @@ public class Main
 
     public static void main(String[] args)
     {
+        UI ui = null;
         try
         {
-            UI.start();
+            ui = new UI();
         }
         catch (IOException e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("You dont have the picture in your folder, dumbass");
         }
-
+        if (ui == null)
+        {
+            return;
+        }
         boolean whiteTurn = true;
         PieceManager.resetBoard();
         while (true)
         {
+            ui.update();
             try
             {
-
                 InputManager.handleInput();
 
                 // Find piece on the working square, and try to move to target square

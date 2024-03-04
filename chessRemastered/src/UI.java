@@ -9,27 +9,38 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-// I know code quality in here sucks, but i stole it from the internet, so deal with it :)
+// I know code quality in here sucks, but I practically stole it from the internet, so deal with it :)
 
 
 public class UI
 {
-    public static void start() throws IOException
+    JFrame frame;
+    BufferedImage img;
+    Image[] imgs = new Image[12];
+
+    public UI() throws IOException
     {
-        JFrame frame = new JFrame();
+        this.frame = new JFrame();
         frame.setBounds(10, 10, 512, 512);
         frame.setUndecorated(true); // Whether to have buttons and bar on UI
-        BufferedImage all = ImageIO.read(new File("e:\\downloads2/chess.png"));
-        Image[] imgs = new Image[12];
+        this.img = ImageIO.read(new File("e:\\downloads2/chess.png"));
+
         int ind = 0;
         for (int y = 0; y < 400; y += 200)
         {
             for (int x = 0; x < 1200; x += 200)
             {
-                imgs[ind] = all.getSubimage(x, y, 200, 200).getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
+                imgs[ind] = img.getSubimage(x, y, 200, 200).getScaledInstance(64, 64, BufferedImage.SCALE_SMOOTH);
                 ind++;
             }
         }
+
+    }
+
+    public void update()
+    {
+
+
         JPanel panel = new JPanel()
         {
             @Override
@@ -59,8 +70,11 @@ public class UI
                 {
                     for (int k = 0; k < 8; k++)
                     {
+
                         int ind = 0;
                         Piece piece = PieceManager.pieceOnSquare(new Position(i, k));
+
+
                         if (piece == null)
                         {
                             continue;
@@ -108,7 +122,10 @@ public class UI
                 }
             }
         };
+        frame.revalidate();
         frame.add(panel);
+        panel.revalidate();
+        frame.repaint();
         //frame.setDefaultCloseOperation.(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.setVisible(true);
     }
