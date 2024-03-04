@@ -79,7 +79,6 @@ public class UI
                         {
                             continue;
                         }
-                        System.out.println(piece.isWhite());
 
                         switch (piece.getSymbol())
                         {
