@@ -16,8 +16,6 @@ public class Pawn extends Piece
 
         if (!this.hasMoved)
         {
-            System.out.println(position.x() + " " + position.y());
-            System.out.println(this.getPosition().x() + " " + this.getPosition().y());
             if (this.getPosition().x() == position.x())
             {
                 if (isWhite() && position.y() == 3)
