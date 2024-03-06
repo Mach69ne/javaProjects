@@ -4,7 +4,7 @@ public class Knight extends Piece
 {
     public Knight(boolean isWhite, int x, int y)
     {
-        super(isWhite,x,y);
+        super(isWhite, x, y, 3);
     }
 
     @Override
@@ -16,7 +16,10 @@ public class Knight extends Piece
         int deltaY = Math.abs(this.getPosition().y() - position.y());
 
         System.out.println(deltaX + " " + deltaY);
-        if (deltaX == 1 && deltaY == 2) return true;
+        if (deltaX == 1 && deltaY == 2)
+        {
+            return true;
+        }
         return deltaX == 2 && deltaY == 1;
 
     }

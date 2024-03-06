@@ -4,7 +4,7 @@ public class Rook extends Piece
 {
     public Rook(boolean isWhite, int x, int y)
     {
-        super(isWhite, x, y);
+        super(isWhite, x, y, 5);
     }
 
     @Override

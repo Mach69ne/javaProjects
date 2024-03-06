@@ -7,7 +7,7 @@ public class Queen extends Piece
 
     public Queen(boolean isWhite, int x, int y)
     {
-        super(isWhite, x, y);
+        super(isWhite, x, y, 9);
         this.bishop = new Bishop(this.isWhite(), this.getPosition().x(), this.getPosition().y());
         this.rook = new Rook(this.isWhite(), this.getPosition().x(), this.getPosition().y());
         PieceManager.addPiece(this, x, y);

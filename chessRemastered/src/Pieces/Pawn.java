@@ -6,7 +6,7 @@ public class Pawn extends Piece
 
     public Pawn(boolean isWhite, int x, int y)
     {
-        super(isWhite, x, y);
+        super(isWhite, x, y, 1);
     }
 
     @Override

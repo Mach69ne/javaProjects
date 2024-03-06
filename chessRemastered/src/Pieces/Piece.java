@@ -3,10 +3,12 @@ package Pieces;
 public class Piece
 {
     private final boolean isWhite;
+    private final int worth;
     private Position position;
 
-    public Piece(boolean isWhite, int x, int y)
+    public Piece(boolean isWhite, int x, int y, int worth)
     {
+        this.worth = worth;
         this.isWhite = isWhite;
         this.position = new Position(x, y);
         PieceManager.addPiece(this, x, y);
@@ -25,6 +27,11 @@ public class Piece
     public boolean isWhite()
     {
         return isWhite;
+    }
+
+    public int getWorth()
+    {
+        return this.worth;
     }
 
     public Position getPosition()
