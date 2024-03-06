@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class PieceManager
 {
     //private static final Stack<Piece[][]> boardStack = new Stack<Piece[][]>();
-    private static final Piece[][] board = new Piece[8][8];
+    private static Piece[][] board = new Piece[8][8];
     private static Position whiteKingPosition;
     private static Position blackKingPosition;
 
@@ -89,6 +89,16 @@ public class PieceManager
             System.out.println(printString);
             printString = new StringBuilder();
         }
+    }
+
+    public static Piece[][] getBoard()
+    {
+        return board;
+    }
+
+    public static void setBoard(Piece[][] newBoard)
+    {
+        board = newBoard;
     }
 
     public static Piece pieceOnSquare(Position position)
