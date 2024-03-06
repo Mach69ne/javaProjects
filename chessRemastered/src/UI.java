@@ -5,6 +5,7 @@ import Pieces.Position;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +18,8 @@ public class UI
     JFrame frame;
     BufferedImage img;
     Image[] imgs = new Image[12];
+    MouseListener mouseListener = new MouseListener();
+
 
     public UI() throws IOException
     {
@@ -127,7 +130,48 @@ public class UI
         frame.revalidate();
         frame.add(panel);
         panel.revalidate();
+        panel.addMouseListener(new MouseListener());
         frame.repaint();
         frame.setVisible(true);
+    }
+
+    private class MouseListener implements java.awt.event.MouseListener
+    {
+        private Position position = null;
+
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            this.position = new Position(e.getX(), e.getY());
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e)
+        {
+            UI.this.update();
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e)
+        {
+            UI.this.update();
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e)
+        {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e)
+        {
+
+        }
+
+        public Position getPosition()
+        {
+            return position;
+        }
     }
 }
