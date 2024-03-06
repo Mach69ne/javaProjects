@@ -128,7 +128,6 @@ public class UI
         frame.add(panel);
         panel.revalidate();
         frame.repaint();
-        //frame.setDefaultCloseOperation.(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.setVisible(true);
     }
 }
