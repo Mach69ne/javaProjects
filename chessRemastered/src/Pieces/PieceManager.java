@@ -1,13 +1,46 @@
 package Pieces;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class PieceManager
 {
-    //private static final Stack<Piece[][]> boardStack = new Stack<Piece[][]>();
-    private static Piece[][] board = new Piece[8][8];
+    private static final Stack<Piece[][]> boardHistory = new Stack<Piece[][]>();
+    private static final Piece[][] board = new Piece[8][8];
     private static Position whiteKingPosition;
     private static Position blackKingPosition;
+
+    public static void addBoardToHistory()
+    {
+        boardHistory.push(getBoard());
+    }
+
+    public static Piece[][] getBoard()
+    {
+        Piece[][] newBoard = new Piece[8][8];
+        for (int i = 0; i < 8; i++)
+        {
+            System.arraycopy(board[i], 0, newBoard[i], 0, 8);
+        }
+        return newBoard;
+    }
+
+    public static void setBoard(Piece[][] newBoard)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            System.arraycopy(newBoard[i], 0, board[i], 0, 8);
+        }
+    }
+
+    public static void undoMove()
+    {
+        if (boardHistory.isEmpty())
+        {
+            return;
+        }
+        setBoard(boardHistory.pop());
+    }
 
     public static void resetBoard()
     {
@@ -91,16 +124,6 @@ public class PieceManager
         }
     }
 
-    public static Piece[][] getBoard()
-    {
-        return board;
-    }
-
-    public static void setBoard(Piece[][] newBoard)
-    {
-        board = newBoard;
-    }
-
     public static Piece pieceOnSquare(Position position)
     {
         return board[position.x()][position.y()];
@@ -182,6 +205,10 @@ public class PieceManager
                     continue;
                 }
                 if (piece.isWhite() == isWhite)
+                {
+                    continue;
+                }
+                if (piece.getPosition().equals(position))
                 {
                     continue;
                 }
