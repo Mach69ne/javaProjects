@@ -21,6 +21,8 @@ public class UI
     Image[] imgs = new Image[12];
     MouseListener mouseListener = new MouseListener();
 
+    private Move move = null;
+
 
     public UI() throws IOException
     {
@@ -122,14 +124,13 @@ public class UI
                         }
                         if (mouseListener.getOriginalPosition() != null)
                         {
-                            int xPosition = Math.floorDiv(mouseListener.getOriginalPosition().x(), 64);
-                            int yPosition = Math.floorDiv(mouseListener.getOriginalPosition().y(), 64);
-                            yPosition -= 7;
-                            yPosition *= -1;
-                            if (piece.getPosition().x() == xPosition && piece.getPosition().y() == yPosition)
+                            Position original = translateMouseToBoard(mouseListener.originalPosition.x(),
+                                    mouseListener.getOriginalPosition().y());
+                            if (piece.getPosition().x() == original.x() && piece.getPosition().y() == original.y())
                             {
                                 if (mouseListener.currentPosition != null)
                                 {
+                                    setMove(new Move(piece, null));
                                     g.drawImage(imgs[ind], mouseListener.getCurrentPosition().x() - 32,
                                             mouseListener.getCurrentPosition().y() - 32, this);
                                     continue;
@@ -154,6 +155,25 @@ public class UI
         frame.setVisible(true);
     }
 
+    private Position translateMouseToBoard(int x, int y)
+    {
+        int xPosition = Math.floorDiv(x, 64);
+        int yPosition = Math.floorDiv(y, 64);
+        yPosition -= 7;
+        yPosition *= -1;
+        return new Position(xPosition, yPosition);
+    }
+
+    public Move getMove()
+    {
+        return move;
+    }
+
+    public void setMove(Move move)
+    {
+        this.move = move;
+    }
+
     private class MouseListener implements java.awt.event.MouseListener, MouseMotionListener
     {
         private Position originalPosition = null;
@@ -174,6 +194,13 @@ public class UI
         @Override
         public void mouseReleased(MouseEvent e)
         {
+            if (this.currentPosition == null)
+            {
+                return;
+            }
+            Position current = UI.this.translateMouseToBoard(this.getCurrentPosition().x(),
+                    this.getCurrentPosition().y());
+            setMove(getMove().changePos(current));
             originalPosition = null;
             currentPosition = null;
             UI.this.update();
@@ -192,14 +219,14 @@ public class UI
 
         }
 
-        public Position getOriginalPosition()
-        {
-            return originalPosition;
-        }
-
         public Position getCurrentPosition()
         {
             return currentPosition;
+        }
+
+        public Position getOriginalPosition()
+        {
+            return originalPosition;
         }
 
         @Override
