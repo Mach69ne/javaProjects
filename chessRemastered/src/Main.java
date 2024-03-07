@@ -50,16 +50,8 @@ public class Main
                 whiteTurn = !whiteTurn;
                 ui.setMove(null);
             }
-            /*
-            boolean inCheck = PieceManager.isInCheck(whiteTurn);
-                       if (inCheck)
-                      {
-                            PieceManager.undoMove();
-                            continue;
-                        }
-            */
 
-            //System.out.println(ChessEngine.calculatePosition());
+            System.out.println(ChessEngine.calculatePosition());
             //PieceManager.printBoard();
 
         }
