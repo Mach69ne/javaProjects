@@ -10,7 +10,6 @@ public class Queen extends Piece
         super(isWhite, x, y, 9);
         this.bishop = new Bishop(this.isWhite(), this.getPosition().x(), this.getPosition().y());
         this.rook = new Rook(this.isWhite(), this.getPosition().x(), this.getPosition().y());
-        PieceManager.addPiece(this, x, y);
     }
 
     @Override
