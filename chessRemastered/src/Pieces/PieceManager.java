@@ -113,18 +113,19 @@ public class PieceManager
 
     public static void addPiece(Piece piece, Position position)
     {
-        if (piece.getSymbol() == 'K')
+        if (piece.getSymbol() == 'P')
         {
-            if (piece.isWhite())
+            if (piece.getPosition().y() == 7 || piece.getPosition().y() == 0)
             {
-                setWhiteKingPosition(position);
-            }
-            else
-            {
-                setBlackKingPosition(position);
+                piece = new Queen(piece.isWhite(), position.x(), position.y());
             }
         }
         addPiece(piece, position.x(), position.y());
+    }
+
+    public static void addPiece(Piece piece, int x, int y)
+    {
+        board[x][y] = piece;
     }
 
     private static void setWhiteKingPosition(Position position)
@@ -135,11 +136,6 @@ public class PieceManager
     private static void setBlackKingPosition(Position position)
     {
         blackKingPosition = position;
-    }
-
-    public static void addPiece(Piece piece, int x, int y)
-    {
-        board[x][y] = piece;
     }
 
     public static boolean isEmpty(Position position)
