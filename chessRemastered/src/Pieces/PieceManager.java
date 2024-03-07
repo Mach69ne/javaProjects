@@ -128,14 +128,16 @@ public class PieceManager
         board[x][y] = piece;
     }
 
-    private static void setWhiteKingPosition(Position position)
+    static void setKingPosition(boolean isWhite, Position position)
     {
-        whiteKingPosition = position;
-    }
-
-    private static void setBlackKingPosition(Position position)
-    {
-        blackKingPosition = position;
+        if (isWhite)
+        {
+            whiteKingPosition = position;
+        }
+        else
+        {
+            blackKingPosition = position;
+        }
     }
 
     public static boolean isEmpty(Position position)
