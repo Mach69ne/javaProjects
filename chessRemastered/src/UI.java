@@ -194,7 +194,11 @@ public class UI
         @Override
         public void mouseReleased(MouseEvent e)
         {
-            if (this.currentPosition == null)
+            if (UI.this.getMove() == null)
+            {
+                return;
+            }
+            if (this.getCurrentPosition() == null)
             {
                 return;
             }
