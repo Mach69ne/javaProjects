@@ -53,9 +53,10 @@ public class Main
                 piece.setPosition(ui.getMove().toPos());
                 whiteTurn = !whiteTurn;
                 ui.setMove(null);
+                System.out.println(ChessEngine.calculatePosition());
             }
 
-            System.out.println(ChessEngine.calculatePosition());
+
             //PieceManager.printBoard();
 
         }
