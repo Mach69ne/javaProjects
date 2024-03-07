@@ -2,7 +2,6 @@ package Pieces;
 
 public class Pawn extends Piece
 {
-    private boolean hasMoved = false;
 
     public Pawn(boolean isWhite, int x, int y)
     {
@@ -17,7 +16,7 @@ public class Pawn extends Piece
             return false;
         }
 
-        if (!this.hasMoved)
+        if (!this.getHasMoved())
         {
             if (this.getPosition().x() == position.x())
             {
@@ -58,13 +57,6 @@ public class Pawn extends Piece
         }
 
         return Math.abs(this.getPosition().x() - position.x()) <= 1;
-    }
-
-    @Override
-    public void setPosition(Position position)
-    {
-        this.hasMoved = true;
-        super.setPosition(position);
     }
 
     @Override
