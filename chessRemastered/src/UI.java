@@ -178,7 +178,6 @@ public class UI
     {
         private Position originalPosition = null;
         private Position currentPosition = null;
-        private boolean isPressed = false;
 
         @Override
         public void mouseClicked(MouseEvent e)
@@ -208,7 +207,6 @@ public class UI
             originalPosition = null;
             currentPosition = null;
             UI.this.update();
-            isPressed = false;
         }
 
         @Override
