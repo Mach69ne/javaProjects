@@ -40,7 +40,7 @@ public class UI
                 ind++;
             }
         }
-
+        this.update();
     }
 
     public void update()
@@ -204,6 +204,8 @@ public class UI
             Position current = UI.this.translateMouseToBoard(this.getCurrentPosition().x(),
                     this.getCurrentPosition().y());
             setMove(getMove().changePos(current));
+            GameManager.makeMove(getMove());
+            setMove(null);
             originalPosition = null;
             currentPosition = null;
             UI.this.update();
