@@ -6,6 +6,7 @@ public class King extends Piece
     {
         super(isWhite, x, y, 0, false);
         this.setPosition(new Position(x, y));
+        this.setHasMoved(false);
     }
 
     @Override
@@ -29,15 +30,15 @@ public class King extends Piece
     }
 
     @Override
+    public char getSymbol()
+    {
+        return 'K';
+    }
+
+    @Override
     public void setPosition(Position position)
     {
         super.setPosition(position);
         PieceManager.setKingPosition(this.isWhite(), position);
-    }
-
-    @Override
-    public char getSymbol()
-    {
-        return 'K';
     }
 }
