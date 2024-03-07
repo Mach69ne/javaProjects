@@ -123,6 +123,9 @@ public class UI
                         {
                             int xPosition = Math.floorDiv(mouseListener.getOriginalPosition().x(), 64);
                             int yPosition = Math.floorDiv(mouseListener.getOriginalPosition().y(), 64);
+                            yPosition -= 7;
+                            yPosition *= -1;
+                            System.out.println(xPosition + " " + yPosition);
                             if (piece.getPosition().x() == xPosition && piece.getPosition().y() == yPosition)
                             {
                                 if (mouseListener.currentPosition != null)
@@ -170,7 +173,7 @@ public class UI
         {
             if (isPressed)
             {
-                currentPosition = new Position(e.getX(), e.getY());
+                this.currentPosition = new Position(e.getX(), e.getY());
                 UI.this.update();
             }
 
