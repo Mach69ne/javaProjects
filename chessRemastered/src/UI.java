@@ -119,6 +119,21 @@ public class UI
                         {
                             ind += 6;
                         }
+                        if (mouseListener.getOriginalPosition() != null)
+                        {
+                            int xPosition = Math.floorDiv(mouseListener.getOriginalPosition().x(), 64);
+                            int yPosition = Math.floorDiv(mouseListener.getOriginalPosition().y(), 64);
+                            if (piece.getPosition().x() == xPosition && piece.getPosition().y() == yPosition)
+                            {
+                                if (mouseListener.currentPosition != null)
+                                {
+                                    g.drawImage(imgs[ind], mouseListener.getCurrentPosition().x() - 32,
+                                            mouseListener.getCurrentPosition().y() - 32, this);
+                                    continue;
+                                }
+
+                            }
+                        }
 
 
                         g.drawImage(imgs[ind], i * 64, k * 64, this);
@@ -130,31 +145,45 @@ public class UI
         frame.revalidate();
         frame.add(panel);
         panel.revalidate();
-        panel.addMouseListener(new MouseListener());
+        panel.addMouseListener(mouseListener);
         frame.repaint();
         frame.setVisible(true);
     }
 
     private class MouseListener implements java.awt.event.MouseListener
     {
-        private Position position = null;
+        private Position originalPosition = null;
+        private Position currentPosition = null;
+        private boolean isPressed = false;
 
         @Override
         public void mouseClicked(MouseEvent e)
         {
-            this.position = new Position(e.getX(), e.getY());
+            isPressed = true;
+
+            this.originalPosition = new Position(e.getX(), e.getY());
+
         }
 
         @Override
         public void mousePressed(MouseEvent e)
         {
-            UI.this.update();
+            if (isPressed)
+            {
+                currentPosition = new Position(e.getX(), e.getY());
+                UI.this.update();
+            }
+
+
         }
 
         @Override
         public void mouseReleased(MouseEvent e)
         {
+            originalPosition = null;
+            currentPosition = null;
             UI.this.update();
+            isPressed = false;
         }
 
         @Override
@@ -169,9 +198,15 @@ public class UI
 
         }
 
-        public Position getPosition()
+        public Position getOriginalPosition()
         {
-            return position;
+            return originalPosition;
         }
+
+        public Position getCurrentPosition()
+        {
+            return currentPosition;
+        }
+
     }
 }
