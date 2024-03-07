@@ -6,6 +6,7 @@ public class GameManager
 {
     private static final boolean botToPlayAsWhite = false;
     private static boolean whiteTurn = true;
+    private static boolean moveNotLegal = true;
 
     public static void botToPlayFirst()
     {
@@ -33,9 +34,30 @@ public class GameManager
             System.out.println(ChessEngine.calculatePosition());
             if (whiteTurn == botToPlayAsWhite)
             {
-                makeMove(ChessEngine.getBestMove(botToPlayAsWhite));
+                while (moveNotLegal)
+                {
+                    moveNotLegal = !makeMove(ChessEngine.getBestMove(botToPlayAsWhite));
+                }
+                moveNotLegal = false;
             }
 
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean tryMove(Move move)
+    {
+        if (isMoveLegal(move))
+        {
+            if (moveIsCastle(move))
+            {
+                castle(move, true);
+            }
+            else
+            {
+                move.piece().setPosition(move.toPos());
+            }
             return true;
         }
         return false;

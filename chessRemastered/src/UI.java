@@ -209,6 +209,8 @@ public class UI
             originalPosition = null;
             currentPosition = null;
             UI.this.update();
+
+
         }
 
         @Override

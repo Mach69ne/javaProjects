@@ -6,40 +6,29 @@ import java.util.ArrayList;
 
 public class ChessEngine
 {
-    public static double calculatePosition()
-    {
-        double rating = 0.0;
-        for (int i = 0; i < 8; i++)
-        {
-            for (int k = 0; k < 8; k++)
-            {
-                Piece piece = PieceManager.pieceOnSquare(new Position(i, k));
-                if (piece == null)
-                {
-                    continue;
-                }
-                if (piece.isWhite())
-                {
-                    rating += piece.getWorth();
-                }
-                else
-                {
-                    rating -= piece.getWorth();
-                }
-            }
-        }
-
-        return rating;
-    }
-
     public static Move getBestMove(boolean isWhite)
     {
+        Piece[][] originalBoard = PieceManager.getBoard();
         ArrayList<Move> legalMoves = getAllLegalMoves(isWhite);
         if (legalMoves.isEmpty())
         {
             return null;
         }
-        Move bestMove = legalMoves.get(0);
+        double bestRating = 100.0;
+        Move bestMove = null;
+        for (int i = 0; i < legalMoves.size(); i++)
+        {
+            System.out.println("Calculating move " + i + " out of " + legalMoves.size());
+            GameManager.tryMove(legalMoves.get(i));
+            double rating = calculatePosition();
+            if (rating < bestRating)
+            {
+                bestRating = rating;
+                bestMove = legalMoves.get(i);
+            }
+            PieceManager.setBoard(originalBoard);
+        }
+
         System.out.println(bestMove);
         return bestMove;
     }
@@ -75,5 +64,31 @@ public class ChessEngine
             }
         }
         return legalMoves;
+    }
+
+    public static double calculatePosition()
+    {
+        double rating = 0.0;
+        for (int i = 0; i < 8; i++)
+        {
+            for (int k = 0; k < 8; k++)
+            {
+                Piece piece = PieceManager.pieceOnSquare(new Position(i, k));
+                if (piece == null)
+                {
+                    continue;
+                }
+                if (piece.isWhite())
+                {
+                    rating += piece.getWorth();
+                }
+                else
+                {
+                    rating -= piece.getWorth();
+                }
+            }
+        }
+
+        return rating;
     }
 }
