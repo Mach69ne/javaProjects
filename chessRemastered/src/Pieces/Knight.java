@@ -14,8 +14,7 @@ public class Knight extends Piece
 
         int deltaX = Math.abs(this.getPosition().x() - position.x());
         int deltaY = Math.abs(this.getPosition().y() - position.y());
-
-        System.out.println(deltaX + " " + deltaY);
+        
         if (deltaX == 1 && deltaY == 2)
         {
             return true;
