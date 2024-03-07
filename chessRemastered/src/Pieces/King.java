@@ -28,6 +28,13 @@ public class King extends Piece
     }
 
     @Override
+    public void setPosition(Position position)
+    {
+        super.setPosition(position);
+        PieceManager.setKingPosition(this.isWhite(), position);
+    }
+
+    @Override
     public char getSymbol()
     {
         return 'K';
