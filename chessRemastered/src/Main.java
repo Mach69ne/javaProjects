@@ -13,7 +13,7 @@ public class Main
         }
         catch (IOException e)
         {
-            System.out.println("You dont have the picture dumbass");
+            System.out.println("You don't have the picture dumbass");
             throw new RuntimeException(e);
         }
 
