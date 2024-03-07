@@ -1,15 +1,8 @@
 import Pieces.Piece;
-import Pieces.PieceManager;
 
 public class GameManager
 {
     private static boolean whiteTurn = true;
-
-    GameManager()
-    {
-
-        PieceManager.resetBoard();
-    }
 
     public static boolean getWhiteTurn()
     {
