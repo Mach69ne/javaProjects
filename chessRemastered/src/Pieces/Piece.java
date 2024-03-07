@@ -11,7 +11,7 @@ public class Piece
     {
         this.worth = worth;
         this.isWhite = isWhite;
-        setPosition(new Position(x, y));
+        this.position = new Position(x, y);
         PieceManager.addPiece(this, position);
     }
 
@@ -19,7 +19,7 @@ public class Piece
     {
         this.worth = worth;
         this.isWhite = isWhite;
-        setPosition(new Position(x, y));
+        this.position = new Position(x, y);
         if (updatePieceManager)
         {
             PieceManager.addPiece(this, position);
@@ -29,29 +29,25 @@ public class Piece
     public boolean checkIfMoveIsLegal(Position position)
     {
         return !PieceManager.isSameColor(this.isWhite(), position);
+    }    public Position getPosition()
+    {
+        return this.position;
     }
 
     public boolean isWhite()
     {
         return isWhite;
+    }    public void setPosition(Position position)
+    {
+        PieceManager.removePiece(this.getPosition());
+        this.position = position;
+        PieceManager.addPiece(this, this.position);
+        setHasMoved(true);
     }
 
     public int getWorth()
     {
         return this.worth;
-    }
-
-    public Position getPosition()
-    {
-        return this.position;
-    }
-
-    public void setPosition(Position position)
-    {
-        PieceManager.removePiece(this.position);
-        this.position = position;
-        PieceManager.addPiece(this, this.position);
-        setHasMoved(true);
     }
 
     public char getSymbol()
@@ -68,4 +64,8 @@ public class Piece
     {
         this.hasMoved = hasMoved;
     }
+
+
+
+
 }
