@@ -32,21 +32,19 @@ public class ChessEngine
         return rating;
     }
 
-    public static Move getBestMove()
+    public static Move getBestMove(boolean isWhite)
     {
-        Piece[][] originalPosition = PieceManager.getBoard().clone();
-        ArrayList<Move> legalMoves = getAllLegalMoves();
+        ArrayList<Move> legalMoves = getAllLegalMoves(isWhite);
         if (legalMoves.isEmpty())
         {
             return null;
         }
         Move bestMove = legalMoves.get(0);
-        //PieceManager.setBoard(originalPosition);
-        tryMove(bestMove);
+        System.out.println(bestMove);
         return bestMove;
     }
 
-    private static ArrayList<Move> getAllLegalMoves()
+    private static ArrayList<Move> getAllLegalMoves(boolean isWhite)
     {
         ArrayList<Move> legalMoves = new ArrayList<Move>();
         for (int i = 0; i < 8; i++)
@@ -62,17 +60,14 @@ public class ChessEngine
                         {
                             continue;
                         }
-                        try
-                        {
-                            piece.checkIfMoveIsLegal(new Position(x, y));
-                        }
-                        catch (IllegalArgumentException e)
+                        if (piece.isWhite() != isWhite)
                         {
                             continue;
                         }
-                        if (piece.checkIfMoveIsLegal(new Position(x, y)))
+                        Move moveToCheck = new Move(piece, new Position(x, y));
+                        if (GameManager.isMoveLegal(moveToCheck))
                         {
-                            legalMoves.add(new Move(piece, new Position(x, y)));
+                            legalMoves.add(moveToCheck);
                         }
 
                     }
@@ -80,10 +75,5 @@ public class ChessEngine
             }
         }
         return legalMoves;
-    }
-
-    private static void tryMove(Move move)
-    {
-        move.piece().setPosition(move.toPos());
     }
 }

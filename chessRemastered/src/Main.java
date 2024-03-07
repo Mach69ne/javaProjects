@@ -10,6 +10,10 @@ public class Main
         {
             PieceManager.resetBoard();
             UI ui = new UI();
+            if (GameManager.isBotToPlay())
+            {
+                GameManager.botToPlayFirst();
+            }
         }
         catch (IOException e)
         {

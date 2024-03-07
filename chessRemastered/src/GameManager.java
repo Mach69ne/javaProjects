@@ -4,12 +4,17 @@ import Pieces.Position;
 
 public class GameManager
 {
-    private static final boolean checkMate = false;
+    private static final boolean botToPlayAsWhite = false;
     private static boolean whiteTurn = true;
 
-    public static boolean getWhiteTurn()
+    public static void botToPlayFirst()
     {
-        return whiteTurn;
+        makeMove(ChessEngine.getBestMove(true));
+    }
+
+    public static boolean isBotToPlay()
+    {
+        return botToPlayAsWhite;
     }
 
     public static boolean makeMove(Move move)
@@ -26,6 +31,11 @@ public class GameManager
             }
             whiteTurn = !whiteTurn;
             System.out.println(ChessEngine.calculatePosition());
+            if (whiteTurn == botToPlayAsWhite)
+            {
+                makeMove(ChessEngine.getBestMove(botToPlayAsWhite));
+            }
+
             return true;
         }
         return false;
