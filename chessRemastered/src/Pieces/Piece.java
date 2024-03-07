@@ -5,12 +5,13 @@ public class Piece
     private final boolean isWhite;
     private final int worth;
     private Position position;
+    private boolean hasMoved = false;
 
     public Piece(boolean isWhite, int x, int y, int worth)
     {
         this.worth = worth;
         this.isWhite = isWhite;
-        this.position = new Position(x, y);
+        setPosition(new Position(x, y));
         PieceManager.addPiece(this, position);
     }
 
@@ -18,7 +19,7 @@ public class Piece
     {
         this.worth = worth;
         this.isWhite = isWhite;
-        this.position = new Position(x, y);
+        setPosition(new Position(x, y));
         if (updatePieceManager)
         {
             PieceManager.addPiece(this, position);
@@ -50,6 +51,7 @@ public class Piece
         PieceManager.removePiece(this.position);
         this.position = position;
         PieceManager.addPiece(this, this.position);
+        setHasMoved(true);
     }
 
     public char getSymbol()
@@ -57,4 +59,13 @@ public class Piece
         return '.';
     }
 
+    public boolean getHasMoved()
+    {
+        return hasMoved;
+    }
+
+    public void setHasMoved(boolean hasMoved)
+    {
+        this.hasMoved = hasMoved;
+    }
 }
