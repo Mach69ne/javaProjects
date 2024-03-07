@@ -2,8 +2,6 @@ package Pieces;
 
 public class King extends Piece
 {
-    private boolean hasMoved = false;
-
     public King(boolean isWhite, int x, int y)
     {
         super(isWhite, x, y, 0, false);
@@ -34,7 +32,6 @@ public class King extends Piece
     public void setPosition(Position position)
     {
         super.setPosition(position);
-        this.hasMoved = true;
         PieceManager.setKingPosition(this.isWhite(), position);
     }
 
