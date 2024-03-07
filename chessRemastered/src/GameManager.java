@@ -39,9 +39,11 @@ public class GameManager
             }
             Piece pieceOnToSquare = PieceManager.pieceOnSquare(move.toPos());
             Position oldPosition = piece.getPosition();
+            boolean hasMoved = piece.getHasMoved();
             piece.setPosition(move.toPos());
             boolean isInCheck = !PieceManager.isInCheck(whiteTurn);
             resetMove(move, pieceOnToSquare, oldPosition);
+            piece.setHasMoved(hasMoved);
             return isInCheck;
         }
         return false;
