@@ -3,6 +3,12 @@ import Pieces.PieceManager;
 
 import java.io.IOException;
 
+/*
+TO DO LIST: king can move into check by pawn
+
+
+
+*/
 public class Main
 {
 
@@ -15,23 +21,28 @@ public class Main
         }
         catch (IOException e)
         {
-            System.out.println("You dont have the picture in your folder, dumbass");
+            System.out.println("You don't have chess.png in your folder, dumbass");
         }
         if (ui == null)
         {
             return;
         }
+        ui.update();
         boolean whiteTurn = true;
         PieceManager.resetBoard();
         while (true)
         {
             ui.update();
+
+
             try
             {
-                InputManager.handleInput();
-
+                if (ui.getMove().piece() == null || ui.getMove().toPos() == null || ui.getMove() == null)
+                {
+                    continue;
+                }
                 // Find piece on the working square, and try to move to target square
-                Piece piece = PieceManager.pieceOnSquare(InputManager.getFromPosition());
+                Piece piece = ui.getMove().piece();
                 if (piece == null)
                 {
                     throw new IllegalArgumentException("That field is currently empty");
@@ -40,9 +51,9 @@ public class Main
                 {
                     throw new IllegalArgumentException("You cannot move opponents piece");
                 }
-                if (piece.checkIfMoveIsLegal(InputManager.getToPosition()))
+                if (piece.checkIfMoveIsLegal(ui.getMove().toPos()))
                 {
-                    piece.setPosition(InputManager.getToPosition());
+                    piece.setPosition(ui.getMove().toPos());
                     System.out.println("Moved piece");
                 }
                 else
@@ -62,14 +73,18 @@ public class Main
                 whiteTurn = true;
                 continue;
             }
-            //boolean inCheck = PieceManager.isInCheck(whiteTurn);
-            //            if (inCheck)
-            //            {
-            //                PieceManager.undoMove();
-            //                continue;
-            //            }
+            /*
+            boolean inCheck = PieceManager.isInCheck(whiteTurn);
+                       if (inCheck)
+                      {
+                            PieceManager.undoMove();
+                            continue;
+                        }
+            */
             whiteTurn = !whiteTurn;
-            PieceManager.printBoard();
+            //System.out.println(ChessEngine.calculatePosition());
+            //PieceManager.printBoard();
+
         }
 
 

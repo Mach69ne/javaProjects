@@ -10,7 +10,7 @@ public class Pawn extends Piece
     }
 
     @Override
-    public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
+    public boolean checkIfMoveIsLegal(Position position)
     {
         super.checkIfMoveIsLegal(position);
 
@@ -31,11 +31,11 @@ public class Pawn extends Piece
 
         if (this.getPosition().x() == position.x() && !PieceManager.isEmpty(position))
         {
-            throw new IllegalArgumentException("Cant capture pieces non-diagonally");
+            return false;
         }
         if (this.getPosition().x() != position.x() && PieceManager.isEmpty(position))
         {
-            throw new IllegalArgumentException("Your pawn cannot move in that direction, " + "as you are trying to " + "capture the air");
+            return false;
         }
 
 
@@ -43,25 +43,18 @@ public class Pawn extends Piece
         {
             if (this.getPosition().y() - position.y() != -1)
             {
-                throw new IllegalArgumentException("You cant move to that tile");
+                return false;
             }
         }
         else
         {
             if (this.getPosition().y() - position.y() != 1)
             {
-                throw new IllegalArgumentException("You cant move to that tile");
+                return false;
             }
         }
 
-        if (Math.abs(this.getPosition().x() - position.x()) <= 1)
-        {
-            return true;
-        }
-        else
-        {
-            throw new IllegalArgumentException("Cannot capture piece more than 1 tile away");
-        }
+        return Math.abs(this.getPosition().x() - position.x()) <= 1;
     }
 
     @Override

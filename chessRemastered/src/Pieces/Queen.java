@@ -14,7 +14,7 @@ public class Queen extends Piece
     }
 
     @Override
-    public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
+    public boolean checkIfMoveIsLegal(Position position)
     {
         super.checkIfMoveIsLegal(position);
         boolean returnStatement = false;

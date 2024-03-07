@@ -8,7 +8,7 @@ public class Bishop extends Piece
     }
 
     @Override
-    public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
+    public boolean checkIfMoveIsLegal(Position position)
     {
         if (this.getPosition().equals(position))
         {

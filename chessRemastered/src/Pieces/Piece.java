@@ -14,14 +14,9 @@ public class Piece
         PieceManager.addPiece(this, x, y);
     }
 
-    public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
+    public boolean checkIfMoveIsLegal(Position position)
     {
-        if (PieceManager.isSameColor(this.isWhite(), position))
-        {
-            throw new IllegalArgumentException("Your own piece is in the way");
-        }
-
-        return true;
+        return !PieceManager.isSameColor(this.isWhite(), position);
     }
 
     public boolean isWhite()

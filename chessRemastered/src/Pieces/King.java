@@ -8,7 +8,7 @@ public class King extends Piece
     }
 
     @Override
-    public boolean checkIfMoveIsLegal(Position position) throws IllegalArgumentException
+    public boolean checkIfMoveIsLegal(Position position)
     {
         super.checkIfMoveIsLegal(position);
 
@@ -17,18 +17,11 @@ public class King extends Piece
 
         if (PieceManager.isTileUnderThreat(isWhite(), position))
         {
-            throw new IllegalArgumentException("That tile is unsafe");
+            return false;
         }
 
         // Check if move is one square from current position
-        if (Math.abs(super.getPosition().x() - position.x()) <= 1 && Math.abs(position.y() - super.getPosition().y()) <= 1)
-        {
-            return true;
-        }
-        else
-        {
-            throw new IllegalArgumentException("The king cant move that far");
-        }
+        return Math.abs(super.getPosition().x() - position.x()) <= 1 && Math.abs(position.y() - super.getPosition().y()) <= 1;
     }
 
     @Override
