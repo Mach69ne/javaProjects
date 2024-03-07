@@ -37,6 +37,7 @@ public class Main
             {
                 continue;
             }
+
             // Find piece on the working square, and try to move to target square
             Piece piece = ui.getMove().piece();
             if (piece.isWhite() != whiteTurn)
@@ -47,6 +48,7 @@ public class Main
             {
                 piece.setPosition(ui.getMove().toPos());
                 whiteTurn = !whiteTurn;
+                ui.setMove(null);
             }
             /*
             boolean inCheck = PieceManager.isInCheck(whiteTurn);
