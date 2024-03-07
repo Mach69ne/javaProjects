@@ -46,21 +46,26 @@ public class GameManager
         return false;
     }
 
-    public static boolean tryMove(Move move)
+    public static double tryMove(Move move)
     {
+        double rating = ChessEngine.calculatePosition();
         if (isMoveLegal(move))
         {
             if (moveIsCastle(move))
             {
-                castle(move, true);
+                castle(move, false);
             }
             else
             {
+                Piece pieceOnMoveTo = PieceManager.pieceOnSquare(move.toPos());
+                Position formerPosition = move.piece().getPosition();
                 move.piece().setPosition(move.toPos());
+                rating = ChessEngine.calculatePosition();
+                resetMove(move, pieceOnMoveTo, formerPosition);
             }
-            return true;
+
         }
-        return false;
+        return rating;
     }
 
     public static boolean isMoveLegal(Move move)

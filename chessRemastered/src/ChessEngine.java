@@ -19,14 +19,13 @@ public class ChessEngine
         for (int i = 0; i < legalMoves.size(); i++)
         {
             System.out.println("Calculating move " + i + " out of " + legalMoves.size());
-            GameManager.tryMove(legalMoves.get(i));
-            double rating = calculatePosition();
+            double rating = GameManager.tryMove(legalMoves.get(i));
+
             if (rating < bestRating)
             {
                 bestRating = rating;
                 bestMove = legalMoves.get(i);
             }
-            PieceManager.setBoard(originalBoard);
         }
 
         System.out.println(bestMove);
