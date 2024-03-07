@@ -177,6 +177,10 @@ public class PieceManager
                 {
                     continue;
                 }
+                if (piece.getPosition() == null || position == null)
+                {
+                    continue;
+                }
                 if (piece.isWhite() == isWhite)
                 {
                     continue;
@@ -189,6 +193,7 @@ public class PieceManager
                     }
                     continue;
                 }
+
                 if (piece.getSymbol() == 'P')
                 {
                     if (piece.getPosition().x() == position.x())
@@ -219,6 +224,5 @@ public class PieceManager
         }
         return false;
     }
-
 
 }
