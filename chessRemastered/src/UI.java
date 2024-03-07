@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -125,7 +126,6 @@ public class UI
                             int yPosition = Math.floorDiv(mouseListener.getOriginalPosition().y(), 64);
                             yPosition -= 7;
                             yPosition *= -1;
-                            System.out.println(xPosition + " " + yPosition);
                             if (piece.getPosition().x() == xPosition && piece.getPosition().y() == yPosition)
                             {
                                 if (mouseListener.currentPosition != null)
@@ -149,11 +149,12 @@ public class UI
         frame.add(panel);
         panel.revalidate();
         panel.addMouseListener(mouseListener);
+        panel.addMouseMotionListener(mouseListener);
         frame.repaint();
         frame.setVisible(true);
     }
 
-    private class MouseListener implements java.awt.event.MouseListener
+    private class MouseListener implements java.awt.event.MouseListener, MouseMotionListener
     {
         private Position originalPosition = null;
         private Position currentPosition = null;
@@ -162,22 +163,12 @@ public class UI
         @Override
         public void mouseClicked(MouseEvent e)
         {
-            isPressed = true;
-
-            this.originalPosition = new Position(e.getX(), e.getY());
-
         }
 
         @Override
         public void mousePressed(MouseEvent e)
         {
-            if (isPressed)
-            {
-                this.currentPosition = new Position(e.getX(), e.getY());
-                UI.this.update();
-            }
-
-
+            this.originalPosition = new Position(e.getX(), e.getY());
         }
 
         @Override
@@ -211,5 +202,17 @@ public class UI
             return currentPosition;
         }
 
+        @Override
+        public void mouseDragged(MouseEvent e)
+        {
+            this.currentPosition = new Position(e.getX(), e.getY());
+            UI.this.update();
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e)
+        {
+
+        }
     }
 }
