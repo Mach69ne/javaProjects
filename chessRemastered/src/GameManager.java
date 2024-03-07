@@ -16,7 +16,14 @@ public class GameManager
     {
         if (isMoveLegal(move))
         {
-            move.piece().setPosition(move.toPos());
+            if (moveIsCastle(move))
+            {
+                castle(move, true);
+            }
+            else
+            {
+                move.piece().setPosition(move.toPos());
+            }
             whiteTurn = !whiteTurn;
             System.out.println(ChessEngine.calculatePosition());
             return true;
@@ -28,7 +35,7 @@ public class GameManager
     {
         if (moveIsCastle(move))
         {
-            System.out.println(castle(move));
+            return castle(move, false);
         }
         Piece piece = move.piece();
         if (piece.isWhite() != whiteTurn)
@@ -59,6 +66,10 @@ public class GameManager
         {
             return false;
         }
+        if (move.piece().getHasMoved())
+        {
+            return false;
+        }
         if (move.piece().getSymbol() == 'K')
         {
             return Math.abs(move.toPos().x() - move.piece().getPosition().x()) == 2;
@@ -66,7 +77,7 @@ public class GameManager
         return false;
     }
 
-    private static boolean castle(Move move)
+    private static boolean castle(Move move, boolean movePieces)
     {
         Position rookPosition = null;
         boolean kingSide = move.toPos().x() > 5;
@@ -84,13 +95,21 @@ public class GameManager
         }
         Piece rook = PieceManager.pieceOnSquare(rookPosition);
         Position positionToCheck = new Position(move.piece().getPosition().x(), move.piece().getPosition().y());
-        if (rook.getSymbol() != 'R')
+        if (rook == null || rook.getSymbol() != 'R' || rook.getHasMoved())
         {
             return false;
         }
         boolean piecesBlocking = true;
+        boolean isThreatened = false;
         if (kingSide)
         {
+            for (int i = 0; i < 1; i++)
+            {
+                if (PieceManager.isTileUnderThreat(move.piece().isWhite(), move.piece().getPosition().changeX(i + 1)))
+                {
+                    isThreatened = true;
+                }
+            }
             if (isMoveLegal(new Move(rook, move.piece().getPosition().changeX(1))) && PieceManager.isEmpty(move.piece().getPosition().changeX(1)))
             {
                 piecesBlocking = false;
@@ -98,12 +117,35 @@ public class GameManager
         }
         else
         {
+            for (int i = 2; i > 0; i--)
+            {
+                if (PieceManager.isTileUnderThreat(move.piece().isWhite(), move.piece().getPosition().changeX(i - 1)))
+                {
+                    isThreatened = true;
+                }
+            }
             if (isMoveLegal(new Move(rook, move.piece().getPosition().changeX(-1))) && PieceManager.isEmpty(move.piece().getPosition().changeX(-1)))
             {
                 piecesBlocking = false;
             }
         }
-        return !piecesBlocking;
+        if (!piecesBlocking && !isThreatened)
+        {
+            if (movePieces)
+            {
+                move.piece().setPosition(move.toPos());
+                if (kingSide)
+                {
+                    rook.setPosition(move.piece().getPosition().changeX(-1));
+                }
+                else
+                {
+                    rook.setPosition(move.piece().getPosition().changeX(1));
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     private static void resetMove(Move move, Piece pieceOnToSquare, Position oldSquare)
