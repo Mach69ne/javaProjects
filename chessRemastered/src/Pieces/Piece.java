@@ -2,8 +2,8 @@ package Pieces;
 
 public class Piece
 {
-    private final boolean isWhite;
     private final int worth;
+    private final boolean isWhite;
     private Position position;
     private boolean hasMoved = false;
 
@@ -29,20 +29,11 @@ public class Piece
     public boolean checkIfMoveIsLegal(Position position)
     {
         return !PieceManager.isSameColor(this.isWhite(), position);
-    }    public Position getPosition()
-    {
-        return this.position;
     }
 
     public boolean isWhite()
     {
         return isWhite;
-    }    public void setPosition(Position position)
-    {
-        PieceManager.removePiece(this.getPosition());
-        this.position = position;
-        PieceManager.addPiece(this, this.position);
-        setHasMoved(true);
     }
 
     public int getWorth()
@@ -65,7 +56,19 @@ public class Piece
         this.hasMoved = hasMoved;
     }
 
+    public Position getPosition()
+    {
+        return this.position;
+    }
 
+
+    public void setPosition(Position position)
+    {
+        PieceManager.removePiece(this.getPosition());
+        this.position = position;
+        PieceManager.addPiece(this, this.position);
+        setHasMoved(true);
+    }
 
 
 }
