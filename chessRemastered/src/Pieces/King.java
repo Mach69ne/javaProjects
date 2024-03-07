@@ -4,7 +4,8 @@ public class King extends Piece
 {
     public King(boolean isWhite, int x, int y)
     {
-        super(isWhite, x, y, 0);
+        super(isWhite, x, y, 0, false);
+        this.setPosition(new Position(x, y));
     }
 
     @Override
