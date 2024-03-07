@@ -16,7 +16,10 @@ public class Queen extends Piece
     @Override
     public boolean checkIfMoveIsLegal(Position position)
     {
-        super.checkIfMoveIsLegal(position);
+        if (!super.checkIfMoveIsLegal(position))
+        {
+            return false;
+        }
         boolean returnStatement = false;
         rook.setPosition(this.getPosition());
         bishop.setPosition(this.getPosition());

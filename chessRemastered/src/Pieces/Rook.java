@@ -14,7 +14,10 @@ public class Rook extends Piece
         {
             return true;
         }
-        super.checkIfMoveIsLegal(position);
+        if (!super.checkIfMoveIsLegal(position))
+        {
+            return false;
+        }
         if (this.getPosition().x() != position.x() && this.getPosition().y() != position.y())
         {
             return false;

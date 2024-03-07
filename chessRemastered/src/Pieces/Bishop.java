@@ -14,7 +14,10 @@ public class Bishop extends Piece
         {
             return true;
         }
-        super.checkIfMoveIsLegal(position);
+        if (!super.checkIfMoveIsLegal(position))
+        {
+            return false;
+        }
 
         int deltaX = this.getPosition().x() - position.x();
         int deltaY = this.getPosition().y() - position.y();

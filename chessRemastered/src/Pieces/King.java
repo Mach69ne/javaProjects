@@ -10,7 +10,10 @@ public class King extends Piece
     @Override
     public boolean checkIfMoveIsLegal(Position position)
     {
-        super.checkIfMoveIsLegal(position);
+        if (!super.checkIfMoveIsLegal(position))
+        {
+            return false;
+        }
 
         // Check if the king would be threatened by moving
         // If not, throw IllegalArgumentException caught in Main

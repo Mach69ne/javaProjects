@@ -12,7 +12,10 @@ public class Pawn extends Piece
     @Override
     public boolean checkIfMoveIsLegal(Position position)
     {
-        super.checkIfMoveIsLegal(position);
+        if (!super.checkIfMoveIsLegal(position))
+        {
+            return false;
+        }
 
         if (!this.hasMoved)
         {
