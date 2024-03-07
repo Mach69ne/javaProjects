@@ -14,6 +14,17 @@ public class Piece
         PieceManager.addPiece(this, position);
     }
 
+    public Piece(boolean isWhite, int x, int y, int worth, boolean updatePieceManager)
+    {
+        this.worth = worth;
+        this.isWhite = isWhite;
+        this.position = new Position(x, y);
+        if (updatePieceManager)
+        {
+            PieceManager.addPiece(this, position);
+        }
+    }
+
     public boolean checkIfMoveIsLegal(Position position)
     {
         return !PieceManager.isSameColor(this.isWhite(), position);
