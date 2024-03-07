@@ -11,7 +11,7 @@ public class Piece
         this.worth = worth;
         this.isWhite = isWhite;
         this.position = new Position(x, y);
-        PieceManager.addPiece(this, x, y);
+        PieceManager.addPiece(this, position);
     }
 
     public boolean checkIfMoveIsLegal(Position position)
