@@ -187,18 +187,32 @@ public class PieceManager
                     }
                     continue;
                 }
-                try
+                if (piece.getSymbol() == 'P')
                 {
-
-                    if (piece.checkIfMoveIsLegal(position))
+                    if (piece.getPosition().x() == position.x())
                     {
-                        return true;
+                        continue;
+                    }
+                    if (Math.abs(piece.getPosition().x() - position.x()) <= 1)
+                    {
+                        if (piece.isWhite())
+                        {
+                            if (piece.getPosition().y() - position.y() == -1)
+                            {
+                                return true;
+                            }
+                        }
+                        else if (piece.getPosition().y() - position.y() == 1)
+                        {
+                            return true;
+                        }
                     }
                 }
-                catch (IllegalArgumentException e)
+                if (piece.checkIfMoveIsLegal(position))
                 {
-                    //
+                    return true;
                 }
+
             }
         }
         return false;
