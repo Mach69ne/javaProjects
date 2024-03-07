@@ -46,6 +46,10 @@ public class Main
             }
             if (piece.checkIfMoveIsLegal(ui.getMove().toPos()))
             {
+                if (piece.getPosition().equals(ui.getMove().toPos()))
+                {
+                    continue;
+                }
                 piece.setPosition(ui.getMove().toPos());
                 whiteTurn = !whiteTurn;
                 ui.setMove(null);
