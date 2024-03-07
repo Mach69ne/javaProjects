@@ -2,12 +2,6 @@ import Pieces.PieceManager;
 
 import java.io.IOException;
 
-/*
-TO DO LIST: king can move into check by pawn
-
-
-
-*/
 public class Main
 {
     public static void main(String[] args)
