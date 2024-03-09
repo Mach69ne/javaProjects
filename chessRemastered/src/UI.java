@@ -204,7 +204,10 @@ public class UI
             Position current = UI.this.translateMouseToBoard(this.getCurrentPosition().x(),
                     this.getCurrentPosition().y());
             setMove(getMove().changePos(current));
-            GameManager.makeMove(getMove());
+            if (GameManager.makeMove(getMove()))
+            {
+                //GameManager.botMakeMove();
+            }
             setMove(null);
             originalPosition = null;
             currentPosition = null;

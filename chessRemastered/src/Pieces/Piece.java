@@ -6,6 +6,7 @@ public class Piece
     private final boolean isWhite;
     private Position position;
     private boolean hasMoved = false;
+    private int amountOfLegalMoves = 0;
 
     public Piece(boolean isWhite, int x, int y, int worth)
     {
@@ -71,4 +72,13 @@ public class Piece
     }
 
 
+    public int getAmountOfLegalMoves()
+    {
+        return amountOfLegalMoves;
+    }
+
+    public void setAmountOfLegalMoves(int amountOfLegalMoves)
+    {
+        this.amountOfLegalMoves = amountOfLegalMoves;
+    }
 }

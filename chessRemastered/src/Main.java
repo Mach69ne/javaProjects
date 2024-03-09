@@ -12,7 +12,7 @@ public class Main
             UI ui = new UI();
             if (GameManager.isBotToPlay())
             {
-                GameManager.botToPlayFirst();
+                GameManager.botMakeMove();
             }
         }
         catch (IOException e)

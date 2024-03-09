@@ -6,7 +6,7 @@ import java.util.Stack;
 public class PieceManager
 {
     private static final Stack<Piece[][]> boardHistory = new Stack<Piece[][]>();
-    private static final Piece[][] board = new Piece[8][8];
+    private static Piece[][] board = new Piece[8][8];
     private static Position whiteKingPosition;
     private static Position blackKingPosition;
 
@@ -17,29 +17,11 @@ public class PieceManager
 
     public static Piece[][] getBoard()
     {
-        Piece[][] newBoard = new Piece[8][8];
-        for (int i = 0; i < 8; i++)
-        {
-            System.arraycopy(board[i], 0, newBoard[i], 0, 8);
-        }
-        return newBoard;
+        return board.clone();
     }
-
-    public static void setBoard(Piece[][] newBoard)
+    public static void setBoard(Piece[][]newBoard)
     {
-        for (int i = 0; i < 8; i++)
-        {
-            System.arraycopy(newBoard[i], 0, board[i], 0, 8);
-        }
-    }
-
-    public static void undoMove()
-    {
-        if (boardHistory.isEmpty())
-        {
-            return;
-        }
-        setBoard(boardHistory.pop());
+        board = newBoard;
     }
 
     public static void resetBoard()

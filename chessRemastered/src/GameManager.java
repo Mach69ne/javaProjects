@@ -6,16 +6,18 @@ public class GameManager
 {
     private static final boolean botToPlayAsWhite = false;
     private static boolean whiteTurn = true;
-    private static boolean moveNotLegal = true;
 
-    public static void botToPlayFirst()
+    public static void botMakeMove()
     {
-        makeMove(ChessEngine.getBestMove(true));
+        System.out.println(makeMove(ChessEngine.getBestMove(botToPlayAsWhite)));
     }
-
     public static boolean isBotToPlay()
     {
         return botToPlayAsWhite;
+    }
+    public static boolean getWhiteTurn()
+    {
+        return whiteTurn;
     }
 
     public static boolean makeMove(Move move)
@@ -30,44 +32,17 @@ public class GameManager
             {
                 move.piece().setPosition(move.toPos());
             }
+
             whiteTurn = !whiteTurn;
-            System.out.println(ChessEngine.calculatePosition());
-            if (whiteTurn == botToPlayAsWhite)
-            {
-                while (moveNotLegal)
-                {
-                    moveNotLegal = !makeMove(ChessEngine.getBestMove(botToPlayAsWhite));
-                }
-                moveNotLegal = false;
-            }
 
             return true;
         }
         return false;
     }
-
-    public static double tryMove(Move move)
+    public static void setWhiteTurn(boolean whiteToMove)
     {
-        double rating = ChessEngine.calculatePosition();
-        if (isMoveLegal(move))
-        {
-            if (moveIsCastle(move))
-            {
-                castle(move, false);
-            }
-            else
-            {
-                Piece pieceOnMoveTo = PieceManager.pieceOnSquare(move.toPos());
-                Position formerPosition = move.piece().getPosition();
-                move.piece().setPosition(move.toPos());
-                rating = ChessEngine.calculatePosition();
-                resetMove(move, pieceOnMoveTo, formerPosition);
-            }
-
-        }
-        return rating;
+        whiteTurn = whiteToMove;
     }
-
     public static boolean isMoveLegal(Move move)
     {
         if (moveIsCastle(move))
@@ -185,7 +160,7 @@ public class GameManager
         return false;
     }
 
-    private static void resetMove(Move move, Piece pieceOnToSquare, Position oldSquare)
+    public static void resetMove(Move move, Piece pieceOnToSquare, Position oldSquare)
     {
         move.piece().setPosition(oldSquare);
         if (pieceOnToSquare != null)
